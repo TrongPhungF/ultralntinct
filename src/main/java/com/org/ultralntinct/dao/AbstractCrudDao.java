@@ -1,6 +1,6 @@
 package com.org.ultralntinct.dao;
 
-import com.org.ultralntinct.config.DatabaseConnection;
+import com.org.ultralntinct.config.SqlConfig;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +33,7 @@ public abstract class AbstractCrudDao<T, ID> implements CRUDDao<T, ID> {
 
     static {
         try {
-            connection = DatabaseConnection.getConnection();
+            connection = SqlConfig.getConnection();
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Failed to connect to the database.", e);
         }

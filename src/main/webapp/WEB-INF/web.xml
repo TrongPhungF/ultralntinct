@@ -13,5 +13,16 @@
     <servlet-name>HomeController</servlet-name>
     <url-pattern>/</url-pattern>
     <url-pattern>/home</url-pattern>
+    <url-pattern>/trang-chu</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AuthController</display-name>
+    <servlet-name>AuthController</servlet-name>
+    <servlet-class>com.org.ultralntinct.controller.AuthController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthController</servlet-name>
+    <url-pattern>/dang-nhap</url-pattern>
   </servlet-mapping>
 </web-app>

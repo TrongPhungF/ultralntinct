@@ -32,9 +32,15 @@ public class HoaDonDAOImpl extends AbstractCrudDao<HoaDon, Long> implements HoaD
      */
     @Override
     protected HoaDon mapRow(ResultSet rs) throws SQLException {
-        return HoaDon.builder().hoaDonNo(rs.getLong(Constant.SAN_PHAM_NO)).maHoaDon(rs.getString("maHoaDon"))
-                .maKhachHang(rs.getString("maKhachHang")).maNhanVien(rs.getString("maNhanVien"))
-                .ngayLap(rs.getDate("ngayLap")).trangThai(rs.getBoolean("trangThai")).build();
+        return HoaDon
+               .builder()
+               .hoaDonNo(rs.getLong(Constant.SAN_PHAM_NO))
+               .maHoaDon(rs.getString("maHoaDon"))
+               .maKhachHang(rs.getString("maKhachHang"))
+               .maNhanVien(rs.getString("maNhanVien"))
+               .ngayLap(rs.getDate("ngayLap"))
+               .trangThai(rs.getBoolean("trangThai"))
+               .build();
     }
 
     /**
@@ -74,8 +80,13 @@ public class HoaDonDAOImpl extends AbstractCrudDao<HoaDon, Long> implements HoaD
      */
     @Override
     protected Object[] getEntityValues(HoaDon entity) {
-        return new Object[] { entity.getMaHoaDon(), entity.getMaKhachHang(), entity.getMaNhanVien(),
-                entity.getNgayLap(), entity.isTrangThai() };
+        return new Object[] {
+            entity.getMaHoaDon(),
+            entity.getMaKhachHang(),
+            entity.getMaNhanVien(),
+            entity.getNgayLap(),
+            entity.isTrangThai()
+        };
     }
 
     /**
@@ -108,8 +119,8 @@ public class HoaDonDAOImpl extends AbstractCrudDao<HoaDon, Long> implements HoaD
     protected String getUpdateQuery() {
         return """
                 UPDATE
-                """ + Constant.SAN_PHAM_TABLE_NAME + """
-                SET maHoaDon = ?, maKhachHang = ?, maNhanVien = ?, ngayLap = ?, trangThai = ? WHERE """
+                """ + Constant.SAN_PHAM_TABLE_NAME +
+                " SET maHoaDon = ?, maKhachHang = ?, maNhanVien = ?, ngayLap = ?, trangThai = ? WHERE "
                 + Constant.SAN_PHAM_NO + " = ?";
     }
 

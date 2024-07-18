@@ -7,27 +7,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import lombok.NoArgsConstructor;
 
 /**
  * <p>
- * DatabaseConnection class relate config connection sql.
+ * SqlConfig class relate config connection sql.
  * </p>
  *
- * @author MinhNgoc
+ * @author MinhNgoc.
  */
-@NoArgsConstructor
-public class DatabaseConnection {
+public class SqlConfig {
 
     /**
      * LOGGER
      */
-    private static final Logger LOGGER = Logger.getLogger(DatabaseConnection.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SqlConfig.class.getName());
 
     /**
      * connection
      */
     private static Connection connection = null;
+
+    private SqlConfig() {
+    }
 
     /**
      * <p>
@@ -46,8 +47,7 @@ public class DatabaseConnection {
             String sqlPassword = "123456789";
             String sqlDatabase = "DuAn_QuanLyCuaHang";
 
-            String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s", sqlHost, sqlPort,
-                sqlDatabase);
+            String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s", sqlHost, sqlPort, sqlDatabase);
 
             try {
                 connection = DriverManager.getConnection(url, sqlUsername, sqlPassword);
@@ -57,7 +57,6 @@ public class DatabaseConnection {
                 throw e;
             }
         }
-
         return connection;
     }
 
@@ -76,12 +75,6 @@ public class DatabaseConnection {
         return pstmt;
     }
 
-    /**
-     * Thực hiện câu lệnh SQL thao tác (INSERT, UPDATE, DELETE) hoặc thủ tục lưu thao tác dữ liệu
-     *
-     * @param sql  là câu lệnh SQL chứa có thể chứa tham số. Nó có thể là một lời gọi thủ tục lưu
-     * @param args là danh sách các giá trị được cung cấp cho các tham số trong câu lệnh sql *
-     */
     public static void executeUpdate(String sql, Object... args) {
         try (PreparedStatement stmt = prepareStatement(sql, args)) {
             stmt.executeUpdate();
@@ -90,12 +83,6 @@ public class DatabaseConnection {
         }
     }
 
-    /**
-     * Thực hiện câu lệnh SQL truy vấn (SELECT) hoặc thủ tục lưu truy vấn dữ liệu
-     *
-     * @param sql  là câu lệnh SQL chứa có thể chứa tham số. Nó có thể là một lời gọi thủ tục lưu
-     * @param args là danh sách các giá trị được cung cấp cho các tham số trong câu lệnh sql
-     */
     public static ResultSet executeQuery(String sql, Object... args) {
         try (PreparedStatement stmt = prepareStatement(sql, args)) {
             return stmt.executeQuery();
