@@ -1,28 +1,27 @@
 package com.org.ultralntinct;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
+import com.org.ultralntinct.dao.DiaChiDAO;
+import com.org.ultralntinct.dao.KhachHangDAO;
+import com.org.ultralntinct.dao.NhanVienDAO;
+import com.org.ultralntinct.dao.SanPhamDAO;
+import com.org.ultralntinct.dao.impl.DiaChiDAOImpl;
+import com.org.ultralntinct.dao.impl.KhachHangDAOImpl;
+import com.org.ultralntinct.dao.impl.NhanVienDAOImpl;
+import com.org.ultralntinct.dao.impl.SanPhamDAOImpl;
 import com.org.ultralntinct.model.KhachHang;
 import com.org.ultralntinct.model.NhanVien;
-import com.org.ultralntinct.service.DiaChiService;
-import com.org.ultralntinct.service.KhachHangService;
-import com.org.ultralntinct.service.NhanVienService;
-import com.org.ultralntinct.service.SanPhamService;
-import com.org.ultralntinct.service.impl.DiaChiServiceImpl;
-import com.org.ultralntinct.service.impl.KhachHangServiceImpl;
-import com.org.ultralntinct.service.impl.NhanVienServiceImpl;
-import com.org.ultralntinct.service.impl.SanPhamServiceImpl;
 
 public class Main {
 
 //    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
-    static DiaChiService diaChiDao = new DiaChiServiceImpl();
-    static SanPhamService sanPhamService = new SanPhamServiceImpl();
-    static KhachHangService khachHangService = new KhachHangServiceImpl();
-    static NhanVienService nhanVienService = new NhanVienServiceImpl();
+    static DiaChiDAO diaChiDao = new DiaChiDAOImpl();
+    static SanPhamDAO sanPhamService = new SanPhamDAOImpl();
+    static KhachHangDAO khachHangService = new KhachHangDAOImpl();
+    static NhanVienDAO nhanVienService = new NhanVienDAOImpl();
 
     public static void main(String[] args) {
 

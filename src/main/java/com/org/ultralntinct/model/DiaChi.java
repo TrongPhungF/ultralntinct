@@ -1,8 +1,10 @@
 package com.org.ultralntinct.model;
 
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-//import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -12,13 +14,14 @@ import lombok.RequiredArgsConstructor;
  *
  * @author MinhNgoc
  */
-//@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
 @RequiredArgsConstructor
-public class DiaChi
-//    extends AbstractModel {
-{
+@AllArgsConstructor
+public class DiaChi implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private Long diaChiNo;
 
     private String maDiaChi;

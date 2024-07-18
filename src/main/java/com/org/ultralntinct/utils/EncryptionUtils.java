@@ -1,13 +1,14 @@
 package com.org.ultralntinct.utils;
 
 import java.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 public class EncryptionUtils {
 
-    private static final String SECRET_KEY= "ultralntinct_key";
+//    private static final String SECRET_KEY= "ultralntinct_key";
     private static SecretKey secretKey;
 
     static {

@@ -1,15 +1,26 @@
 package com.org.ultralntinct.model;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * <p>
+ * HoaDonChiTiet class with table.
+ * </p>
+ *
+ * @author MinhNgoc
+ */
 @Data
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class HoaDonChiTiet {
+public class HoaDonChiTiet implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long HDCTNo;
 

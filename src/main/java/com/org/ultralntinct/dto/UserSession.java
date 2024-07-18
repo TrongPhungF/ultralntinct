@@ -1,12 +1,21 @@
 package com.org.ultralntinct.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * <p>
+ * UserSession class with table.
+ * </p>
+ *
+ * @author MinhNgoc
+ */
 @Builder
 @Setter
 @Getter
+@AllArgsConstructor
 public class UserSession {
 
     private static UserSession instance;
