@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 /**
  * <p>
  * Servlet implementation class HomeController
@@ -22,7 +23,6 @@ public class HomeController extends HttpServlet {
      */
     public HomeController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -30,9 +30,7 @@ public class HomeController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        // TODO Auto-generated method stub
         request.getRequestDispatcher("/views/home.jsp").forward(request, response);
-
     }
 
     /**
@@ -40,7 +38,6 @@ public class HomeController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        // TODO Auto-generated method stub
         doGet(request, response);
     }
 

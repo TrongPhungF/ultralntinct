@@ -1,27 +1,26 @@
 package com.org.ultralntinct.controller;
 
-import java.io.IOException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * <p>
- * Servlet implementation class AuthController.
+ * Servlet implementation class HoaDonController.
  * </p>
  *
  * @author MinhNgoc
  */
-public class AuthController extends HttpServlet {
+public class HoaDonController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AuthController() {
+    public HoaDonController() {
         super();
     }
 
@@ -30,7 +29,7 @@ public class AuthController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        request.getRequestDispatcher("/views/auth/dang-nhap.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/hoa-don/hoa-don.jsp").forward(request, response);
     }
 
     /**
@@ -39,6 +38,20 @@ public class AuthController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         doGet(request, response);
+    }
+
+    /**
+     * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
+     */
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    }
+
+    /**
+     * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+     */
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
     }
 
 }

@@ -1,6 +1,5 @@
 package com.org.ultralntinct;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.org.ultralntinct.dao.DiaChiDAO;
@@ -12,7 +11,6 @@ import com.org.ultralntinct.dao.impl.KhachHangDAOImpl;
 import com.org.ultralntinct.dao.impl.NhanVienDAOImpl;
 import com.org.ultralntinct.dao.impl.SanPhamDAOImpl;
 import com.org.ultralntinct.model.KhachHang;
-import com.org.ultralntinct.model.NhanVien;
 
 public class Main {
 
@@ -55,20 +53,20 @@ public class Main {
       List<KhachHang> khachHangs = khachHangService.findAll();
       khachHangs.forEach(khachHang -> System.out.println(khachHang.toString()));
 
-
-    nhanVienService.save(NhanVien.builder()
-        .maNhanVien("NV0010")
-        .tenNhanVien("HCM update")
-        .hoNhanVien("DC00000015")
-        .matKhau("KH006")
-        .soDienThoai("KH006")
-        .email("KH006")
-        .chucVu("KH006")
-        .trangThaiXoa(true)
-        .nguoiTao("NV001")
-        .thoiGianTao(java.sql.Date.valueOf(LocalDateTime.now().toLocalDate()))
-        .build()
-        );
+//
+//    nhanVienService.save(NhanVien.builder()
+//        .maNhanVien("NV0010")
+//        .tenNhanVien("HCM update")
+//        .hoNhanVien("DC00000015")
+//        .matKhau("KH006")
+//        .soDienThoai("KH006")
+//        .email("KH006")
+//        .chucVu("KH006")
+//        .trangThaiXoa(true)
+//        .nguoiTao("NV001")
+//        .thoiGianTao(java.sql.Date.valueOf(LocalDateTime.now().toLocalDate()))
+//        .build()
+//        );
       
     }
 

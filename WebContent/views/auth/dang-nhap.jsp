@@ -1,13 +1,13 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <jsp:include page="/views/page/header.jsp"/>
     <title>Đăng nhập</title>
     <style>
         body {
@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("/static/img/bg.jpg");
+    background-image: url("${pageContext.request.contextPath}/static/img/bg.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -65,7 +65,7 @@
         </div>
     </div>
 
-    <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <jsp:include page="/views/page/footer.jsp"/>
     <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
 </body>
 
