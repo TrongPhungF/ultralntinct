@@ -3,6 +3,8 @@ package com.org.ultralntinct.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.org.ultralntinct.dao.impl.SanPhamDAOImpl;
 import com.org.ultralntinct.dao.jpa.SanPhamDAO;
 import com.org.ultralntinct.model.SanPham;
@@ -39,7 +41,13 @@ public class SanPhamController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<SanPham> sanPhamList = sanPhamDAO.findAll();
+        String sanPhamKeySearch = request.getParameter("sanPhamKeySearch");
+        List<SanPham> sanPhamList;
+        if (StringUtils.isNotBlank(sanPhamKeySearch)) {
+            sanPhamList = sanPhamDAO.searchSanPham(sanPhamKeySearch);
+        } else {
+            sanPhamList = sanPhamDAO.findAll();
+        }
         request.setAttribute("sanPhamList", sanPhamList);
         request.getRequestDispatcher("/views/san-pham/san-pham.jsp").forward(request, response);
     }

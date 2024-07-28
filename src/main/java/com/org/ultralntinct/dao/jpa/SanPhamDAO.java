@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.org.ultralntinct.model.SanPham;
-import com.org.ultralntinct.request.SearchSanPhamRequest;
 
 /**
  * <p>
@@ -30,10 +29,10 @@ public interface SanPhamDAO extends CrudDAO<SanPham, Long> {
      * Method searchSanPham.
      * </p>
      *
-     * @param request
-     *            SearchSanPhamRequest
+     * @param keySearch
+     *            String
      * @return List of SanPham.
      * @author MinhNgoc
      */
-    List<SanPham> searchSanPham(SearchSanPhamRequest request);
+    List<SanPham> searchSanPham(String keySearch);
 }

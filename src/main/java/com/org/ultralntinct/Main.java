@@ -24,8 +24,9 @@ public class Main {
         // diaChiList.forEach(diaChi -> System.out.println(diaChi.toString()));
         
 //      Tìm tất cả KhachHang
-         List<SanPham> diaChiList = sanPhamService.findAll();
-         diaChiList.forEach(diaChi -> System.out.println(diaChi.getMaSanPham().toString()));
+//         List<SanPham> diaChiList = sanPhamService.findAll();
+         List<SanPham> diaChiList = sanPhamService.searchSanPham("Đồng hồ");
+         diaChiList.forEach(diaChi -> System.out.println(diaChi.getMaSanPham()));
         
 
         // List<SanPham> sanPhamList = sanPhamService.searchSanPham(SearchSanPhamRequest

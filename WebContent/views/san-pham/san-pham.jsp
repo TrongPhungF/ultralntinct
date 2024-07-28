@@ -18,12 +18,15 @@
     <div class="col-9 m-2">
         <div class="p-2" style="margin-left: 20px;">
             <div class="input-group mb-3">
+                <form action="${pageContext.request.contextPath}/san-pham">
                 <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-                <input class="form-control" placeholder="Tìm mã sản phẩm, tên sản phẩm">
-                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham" class="plus"><i class="fa-solid fa-plus"></i></a>
-                <div>
-                    <a href="SanPhamForm.html" class="btn custom-btn ms-3" type="button">Danh sách</a>
-                </div>
+                <input class="form-control" name="sanPhamKeySearch" placeholder="Tìm mã sản phẩm, tên sản phẩm">
+                <button class="btn custom-btn ms-1" type="submit" >Tìm kiếm</button>
+                </form>
+<%--                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham" class="plus"><i class="fa-solid fa-plus"></i></a>--%>
+<%--                <div>--%>
+<%--                    <a href="SanPhamForm.html" class="btn custom-btn ms-3" type="button">Danh sách</a>--%>
+<%--                </div>--%>
             </div>
             <div class="invoice-details p-3 border rounded mt-4"
                  style="background-color: #F5F5F5; color: dimgray;">

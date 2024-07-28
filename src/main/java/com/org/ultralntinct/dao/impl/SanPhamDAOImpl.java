@@ -8,10 +8,10 @@ import com.org.ultralntinct.config.JpaConfig;
 import com.org.ultralntinct.dao.jpa.SanPhamDAO;
 import com.org.ultralntinct.model.DiaChi;
 import com.org.ultralntinct.model.SanPham;
-import com.org.ultralntinct.request.SearchSanPhamRequest;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
 /**
  * <p>
@@ -108,9 +108,16 @@ public class SanPhamDAOImpl implements SanPhamDAO {
     }
 
     @Override
-    public List<SanPham> searchSanPham(SearchSanPhamRequest request) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<SanPham> searchSanPham(String keySearch) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            String jpql = "SELECT s FROM SanPham s Where s.maSanPham = :keySearch OR s.tenSanPham LIKE CONCAT('%', :keySearch, '%')";
+            TypedQuery<SanPham> query = em.createQuery(jpql, SanPham.class);
+            query.setParameter("keySearch", keySearch);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
 }
