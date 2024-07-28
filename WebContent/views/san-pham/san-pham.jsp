@@ -49,7 +49,8 @@
                             <td><c:out value="${sanPham.loaiSanPham.maLoaiSanPham}"/></td>
                             <td><c:out value="${sanPham.tenSanPham}"/></td>
                             <td><c:out value="${sanPham.giaNiemYet}"/></td>
-                            <td><c:out value="${sanPham.hinh}"/></td>
+                            <td>    <img src="${sanPham.hinh}" alt="Hình sản phẩm" width="100" height="100"/>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
