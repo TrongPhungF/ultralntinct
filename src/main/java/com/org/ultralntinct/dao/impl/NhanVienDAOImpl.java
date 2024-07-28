@@ -1,155 +1,101 @@
 package com.org.ultralntinct.dao.impl;
 
-import com.org.ultralntinct.dao.AbstractCrudDao;
-import com.org.ultralntinct.dao.NhanVienDAO;
+import java.util.List;
+import java.util.Optional;
+
+import com.org.ultralntinct.config.JpaConfig;
+import com.org.ultralntinct.dao.jpa.NhanVienDAO;
 import com.org.ultralntinct.model.NhanVien;
-import com.org.ultralntinct.utils.Constant;
-import com.org.ultralntinct.utils.EncryptionUtils;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 /**
  * <p>
- * NhanVienDAOImpl represents a concrete implementation of NhanVienDAO.
+ * DiaChiDAOImpl represents a concrete implementation of DiaChiDAO.
  * </p>
  *
- * @author MinhNgoc
+ * @author MinhNgoc.
  */
-public class NhanVienDAOImpl extends AbstractCrudDao<NhanVien, Long> implements NhanVienDAO {
+public class NhanVienDAOImpl implements NhanVienDAO {
 
-    /**
-     * <p>
-     * Method mapRow NhanVien
-     * </p>
-     *
-     * @param rs ResultSet.
-     * @return NhanVien.
-     * @throws SQLException SQLException.
-     * @author MinhNgoc.
-     */
     @Override
-    protected NhanVien mapRow(ResultSet rs) throws SQLException {
-        return NhanVien.builder()
-            .nhanVienNo(rs.getLong(Constant.NHAN_VIEN_NO))
-            .maNhanVien(rs.getString("maNhanVien"))
-            .tenNhanVien(rs.getString("tenNhanVien"))
-            .hoNhanVien(rs.getString("tenNhanVien"))
-            .matKhau(rs.getString("matKhau"))
-            .soDienThoai(rs.getString("soDienThoai"))
-            .email(rs.getString("email"))
-            .chucVu(rs.getString("chucVu"))
-            .trangThaiXoa(rs.getBoolean("trangThaiXoa"))
-            .nguoiTao(rs.getString("nguoiTao"))
-            .thoiGianTao(rs.getDate("nguoiTao"))
-            .build();
-    }
-
-    /**
-     * <p>
-     * Method getTableName table NhanVien.
-     * </p>
-     *
-     * @return String.
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getTableName() {
-        return Constant.NHAN_VIEN_TABLE_NAME;
-    }
-
-    /**
-     * <p>
-     * Method getPrimaryKeyColumnName.
-     * </p>
-     *
-     * @return String.
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getPrimaryKeyColumnName() {
-        return Constant.NHAN_VIEN_NO;
-    }
-
-    /**
-     * <p>
-     * Method getEntityValues.
-     * </p>
-     *
-     * @param entity NhanVien.
-     * @return Object[].
-     * @author MinhNgoc.
-     */
-    @Override
-    protected Object[] getEntityValues(NhanVien entity) {
-        return new Object[]{
-            entity.getMaNhanVien(),
-            entity.getTenNhanVien(),
-            entity.getHoNhanVien(),
-            EncryptionUtils.encrypt(entity.getMatKhau()),
-            entity.getSoDienThoai(),
-            entity.getEmail(),
-            entity.getChucVu(),
-            entity.isTrangThaiXoa(),
-            entity.getNguoiTao(),
-            entity.getThoiGianTao(),
-        };
-    }
-
-    /**
-     * <p>
-     * Method getInsertQuery.
-     * </p>
-     *
-     * @return String
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getInsertQuery() {
-        return """
-            INSERT INTO
-            """ + Constant.NHAN_VIEN_TABLE_NAME + """
-            (maNhanVien, tenNhanVien, hoNhanVien, matKhau, soDienThoai, email, chucVu, trangThaiXoa, nguoiTao, thoiGianTao) 
-            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-            """;
-    }
-
-    /**
-     * <p>
-     * Method getUpdateQuery.
-     * </p>
-     *
-     * @return String
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getUpdateQuery() {
-        return """
-            UPDATE
-            """ + Constant.NHAN_VIEN_TABLE_NAME + """
-            SET maNhanVien = ?, tenNhanVien = ?, hoNhanVien = ?, matKhau = ?, 
-            soDienThoai = ?, email = ?, chucVu = ?, trangThaiXoa = ?, nguoiTao = ?, thoiGianTao = ?  
-            WHERE
-            """ + Constant.SAN_PHAM_NO + " = ? ";
-    }
-
-    /**
-     * <p>
-     * Method get max MaNhanVien.
-     * </p>
-     *
-     * @return long.
-     * @author MinhNgoc.
-     */
-    @Override
-    public long getMaxMaNhanVien() throws SQLException {
-        String sql = " SELECT COUNT(1) MAX_MA_NHANVIEN FROM " + getTableName();
-
-        PreparedStatement stmt = AbstractCrudDao.connection.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
-        if (rs.next()) {
-            return rs.getLong("MAX_MA_NHANVIEN");
+    public void save(NhanVien entity) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.persist(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
         }
-        return 0L;
     }
+
+    @Override
+    public void update(NhanVien entity) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.merge(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Optional<NhanVien> findById(Long id) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            NhanVien entity = em.find(NhanVien.class, id);
+            return entity != null ? Optional.of(entity) : Optional.empty();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<NhanVien> findAll() {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            String jpql = "SELECT n FROM NhanVien n";
+            return em.createQuery(jpql, NhanVien.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            NhanVien entity = em.find(NhanVien.class, id);
+            if (entity != null) {
+                em.remove(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+
 }

@@ -21,8 +21,8 @@
                 <span class="nav-label dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Hàng hóa</span>
                 <span class="select"></span>
                 <ul class="dropdown-menu">
-                    <a href="${pageContext.request.contextPath}/san-pham" class="nav-item">Quản lý sản phẩm</a>
-                    <a href="${pageContext.request.contextPath}/kho-hang" class="nav-item">Quản lý kho</a>
+                    <a href="${pageContext.request.contextPath}/san-pham" style="text-decoration: none;" class="nav-item">Quản lý sản phẩm</a>
+                    <a href="${pageContext.request.contextPath}/kho-hang" style="text-decoration: none;" class="nav-item">Quản lý kho</a>
                 </ul>
             </li>
             <li class="nav-item col-sm-12 dropend">

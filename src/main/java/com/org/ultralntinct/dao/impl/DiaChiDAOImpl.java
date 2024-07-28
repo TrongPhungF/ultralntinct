@@ -1,12 +1,14 @@
 package com.org.ultralntinct.dao.impl;
 
-import com.org.ultralntinct.dao.AbstractCrudDao;
-import com.org.ultralntinct.dao.DiaChiDAO;
+import java.util.List;
+import java.util.Optional;
+
+import com.org.ultralntinct.config.JpaConfig;
+import com.org.ultralntinct.dao.jpa.DiaChiDAO;
 import com.org.ultralntinct.model.DiaChi;
-import com.org.ultralntinct.utils.Constant;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 /**
  * <p>
@@ -15,118 +17,85 @@ import java.sql.SQLException;
  *
  * @author MinhNgoc.
  */
-public class DiaChiDAOImpl extends AbstractCrudDao<DiaChi, Long> implements DiaChiDAO {
+public class DiaChiDAOImpl implements DiaChiDAO {
 
-    /**
-     * <p>
-     * Method mapRow DiaChi
-     * </p>
-     *
-     * @param rs ResultSet
-     * @return DiaChi
-     * @throws SQLException SQLException
-     * @author MinhNgoc
-     */
     @Override
-    protected DiaChi mapRow(ResultSet rs) throws SQLException {
-        return DiaChi.builder()
-               .diaChiNo(rs.getLong(Constant.DIA_CHI_NO))
-               .maDiaChi(rs.getString("maDiaChi"))
-               .diaChi(rs.getString("diaChi"))
-               .diaChiMacDinh(rs.getString("diaChiMacDinh"))
-               .trangThaiXoa(rs.getBoolean("trangThaiXoa"))
-               .maKhachHang(rs.getString("maKhachHang"))
-               .build();
-    }
-
-    /**
-     * <p>
-     * Method getTableName table DiaChi.
-     * </p>
-     *
-     * @return String.
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getTableName() {
-        return Constant.DIA_CHI_TABLE_NAME;
-    }
-
-    /**
-     * <p>
-     * Method getPrimaryKeyColumnName.
-     * </p>
-     *
-     * @return String.
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getPrimaryKeyColumnName() {
-        return Constant.DIA_CHI_NO;
-    }
-
-    /**
-     * <p>
-     * Method getEntityValues.
-     * </p>
-     * @param entity DiaChi.
-     * @return Object[].
-     * @author MinhNgoc.
-     */
-    @Override
-    protected Object[] getEntityValues(DiaChi entity) {
-        return new Object[]{
-            entity.getMaDiaChi(),
-            entity.getDiaChi(),
-            entity.getDiaChiMacDinh(),
-            entity.isTrangThaiXoa(),
-            entity.getMaKhachHang(),
-        };
-    }
-
-    /**
-     * <p>
-     * Method getInsertQuery.
-     * </p>
-     * @return String
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getInsertQuery() {
-        return Constant.INSERT_INTO + Constant.DIA_CHI_TABLE_NAME +"(maDiaChi, diaChi, diaChiMacDinh, trangThaiXoa, maKhachHang) values (?,?,?,?,?);";
-    }
-
-    /**
-     * <p>
-     * Method getUpdateQuery.
-     * </p>
-     * @return String.
-     * @author MinhNgoc.
-     */
-    @Override
-    protected String getUpdateQuery() {
-        return Constant.UPDATE + Constant.DIA_CHI_TABLE_NAME +
-             "SET maDiaChi = ?, diaChi = ?, diaChiMacDinh = ?, trangThaiXoa = ?, maKhachHang = ? WHERE "
-            + Constant.DIA_CHI_NO + "= ?";
-    }
-
-    /**
-     * <p>
-     * Method get max MaDiaChi
-     * </p>
-     *
-     * @return long maxMaDiaChi
-     * @author MinhNgoc
-     */
-    @Override
-    public long getMaxMaDiaChi() throws SQLException {
-        String sql = " SELECT COUNT(1) MAX_MA_DIACHI FROM " + getTableName();
-
-        PreparedStatement stmt = AbstractCrudDao.connection.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
-        if (rs.next()) {
-            return rs.getLong("MAX_MA_DIACHI");
+    public void save(DiaChi entity) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.persist(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
         }
-        return 0L;
     }
+
+    @Override
+    public void update(DiaChi entity) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.merge(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public Optional<DiaChi> findById(Long id) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            DiaChi video = em.find(DiaChi.class, id);
+            return video != null ? Optional.of(video) : Optional.empty();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<DiaChi> findAll() {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            String jpql = "SELECT d FROM DiaChi d";
+            return em.createQuery(jpql, DiaChi.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            DiaChi video = em.find(DiaChi.class, id);
+            if (video != null) {
+                em.remove(video);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
+
 }

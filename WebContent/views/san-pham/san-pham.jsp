@@ -20,14 +20,13 @@
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
                 <input class="form-control" placeholder="Tìm mã sản phẩm, tên sản phẩm">
-                <a href="ChiTietSanPhamForm.html"><i class="fa-solid fa-plus plus"></i></a>
+                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham" class="plus"><i class="fa-solid fa-plus"></i></a>
                 <div>
-                    <a href="SanPhamForm.html" class="btn custom-btn ms-3" type="button">Danh
-                        sách</a>
+                    <a href="SanPhamForm.html" class="btn custom-btn ms-3" type="button">Danh sách</a>
                 </div>
             </div>
             <div class="invoice-details p-3 border rounded mt-4"
-                 style="background-color: #F5F5F5; color: dimgray; ">
+                 style="background-color: #F5F5F5; color: dimgray;">
                 <h3 class="mb-4 text-center">Danh sách sản phẩm</h3>
                 <table class="table">
                     <thead>
@@ -43,30 +42,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="sanPham" items="${sanPhamList} " varStatus="status">
+                    <c:forEach var="sanPham" items="${sanPhamList}" varStatus="status">
                         <tr>
-                            <td>${status.index + 1}</td>
-                            <td>${sanPham.maSanPham}</td>
-                            <td>${sanPham.loaiSanPham}</td>
-                            <td>${sanPham.tenSanPham}</td>
-                            <td>${sanPham.giaNiemYet}</td>
-                            <td>${sanPham.hinh}</td>
+                        <td><c:out value="${status.index + 1}"/></td>
+                            <td><c:out value="${sanPham.maSanPham}"/></td>
+                            <td><c:out value="${sanPham.loaiSanPham.maLoaiSanPham}"/></td>
+                            <td><c:out value="${sanPham.tenSanPham}"/></td>
+                            <td><c:out value="${sanPham.giaNiemYet}"/></td>
+                            <td><c:out value="${sanPham.hinh}"/></td>
                         </tr>
                     </c:forEach>
-                    <tr>
-                        <td>1</td>
-                        <td>1006004</td>
-                        <td>Loa</td>
-                        <td>Marshall Acton 3</td>
-                        <td>7,990,000 vnd</td>
-                        <td><img src="img/marshall/acton3blk.jpg" width="120px" height="120px"></td>
-                        <td><i class="fa-solid fa-trash-can"></i></td>
-                        <td><i class="fa-solid fa-pen"></i></td>
-                    </tr>
-
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
+                <nav aria-label="Page navigation example" class="pagination-container">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">

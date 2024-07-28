@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -9,21 +9,7 @@
     <jsp:include page="/views/page/header.jsp"/>
     <link rel="stylesheet" href="css/chitiethoadon.css">
     <style>
-      .info-label {
-        font-weight: bold;
-        margin-right: 5px;
-      }
-
-      .info-section {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 15px;
-      }
-
-      .info-item {
-        flex: 1;
-        text-align: center;
-      }
+        /* Include the CSS here if not using external stylesheet */
     </style>
 </head>
 <body>
@@ -37,30 +23,37 @@
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
                 <input class="form-control" placeholder="Tìm mã hóa đơn">
-                <a href="ChiTietHoaDonForm.html"><i class="fa-solid fa-plus plus"></i></a>
-                <div>
-                    <a href="HoaDonForm.html" class="btn custom-btn ms-3" type="button">Danh
-                        sách</a>
-                </div>
+                <a href="${pageContext.request.contextPath}/home"><i class="fa-solid fa-plus plus"></i></a>
             </div>
             <!-- Thêm phần mới dưới nút "Danh sách" -->
-            <div class="info-section">
-                <div class="info-item">
-                    <span class="info-label">Thời gian:</span>
-                    <span id="current-time">--:--:--</span>
+            <div class="filter-section">
+                <div class="filter-item">
+                    <label class="filter-label">Thời gian:</label>
+                    <select class="form-control">
+                        <option>Hôm nay</option>
+                        <option>Lựa chọn khác</option>
+                    </select>
                 </div>
-                <div class="info-item">
-                    <span class="info-label">Trạng thái:</span>
-                    <span id="status">Đang xử lý</span>
+                <div class="filter-item">
+                    <label class="filter-label">Trạng thái:</label>
+                    <select class="form-control">
+                        <option>Hoàn thành</option>
+                        <option>Đã hủy</option>
+                        <option>Đang xử lý</option>
+                        <option>Không giao được</option>
+                    </select>
                 </div>
-                <div class="info-item">
-                    <span class="info-label">Người bán:</span>
-                    <span id="salesperson">Nguyễn Văn A</span>
+                <div class="filter-item">
+                    <label class="filter-label">Người bán:</label>
+                    <select class="form-control">
+                        <option>Nguyễn Văn A</option>
+                        <option>Đào Tấn Kiệt</option>
+                    </select>
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-sm-9" style="margin-left: 15px;">
-                    <table class="table">
+                <div class="col-sm-12">
+                    <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Mã hóa đơn</th>
@@ -116,6 +109,16 @@
                         <!-- Add more rows as needed -->
                         </tbody>
                     </table>
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation example" class="pagination-container">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                            <li class="page-item"><a class="page-link" href="#">10</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -123,15 +126,5 @@
 </div>
 <jsp:include page="/views/page/footer.jsp"/>
 <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
-<script>
-  function updateTime() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString();
-    document.getElementById('current-time').innerText = timeString;
-  }
-
-  setInterval(updateTime, 1000);
-  updateTime();  // Initial call to display time immediately
-</script>
 </body>
 </html>

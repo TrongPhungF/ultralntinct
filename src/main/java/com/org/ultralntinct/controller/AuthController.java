@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author MinhNgoc
  */
+
 public class AuthController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -30,7 +31,7 @@ public class AuthController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        request.getRequestDispatcher("/views/auth/dang-nhap.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/auth/login.jsp").forward(request, response);
     }
 
     /**

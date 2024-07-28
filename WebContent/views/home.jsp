@@ -105,21 +105,17 @@
                           </div>
                         </div>
                     </div>
-                    <div style="margin-top: 5px;">
+                    <div style="margin-top: 20px; margin-left: 0px; ">
                       <div class="row d-flex align-items-center" style="flex-wrap: nowrap; margin-bottom: 10px;">
-                        <label style="width: 160px;;">Mã khách hàng</label>
-                        <input class="form-control" style="width: 280px;" placeholder="Mã khách hàng">
-                      </div>
-                      <div class="row d-flex align-items-center" style="flex-wrap: nowrap;">
-                        <label style="width: 160px;;">Tên khách hàng</label>
-                        <input class="form-control" style="width: 280px;" placeholder="Mã khách hàng">
-                      </div>            
+                       <input class="form-control" style="width: 150px;margin-left:13px;" placeholder="Mã khách hàng">
+                       <input class="form-control " style="width: 200px;margin-left:40px;" placeholder="Tên khách hàng">
+                      </div>         
                       <table class="table" style="margin-top: 10px;">
                         <thead>
                           <tr>
                             <th scope="col">STT</th>
-                            <th scope="col">Tên sản phẩm</th>
-                            <th scope="col">Số lượng</th>
+                            <th scope="col">Tên SP</th>
+                            <th scope="col">Số lượng</th>
                             <th scope="col">Giá bán</th>
                             <th scope="col">Tổng</th>
                           </tr>

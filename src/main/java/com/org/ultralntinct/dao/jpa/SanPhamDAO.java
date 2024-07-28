@@ -1,4 +1,4 @@
-package com.org.ultralntinct.dao;
+package com.org.ultralntinct.dao.jpa;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.org.ultralntinct.request.SearchSanPhamRequest;
  *
  * @author MinhNgoc.
  */
-public interface SanPhamDAO extends CRUDDao<SanPham, Long> {
+public interface SanPhamDAO extends CrudDAO<SanPham, Long> {
 
     /**
      * <p>
@@ -30,7 +30,8 @@ public interface SanPhamDAO extends CRUDDao<SanPham, Long> {
      * Method searchSanPham.
      * </p>
      *
-     * @param request SearchSanPhamRequest
+     * @param request
+     *            SearchSanPhamRequest
      * @return List of SanPham.
      * @author MinhNgoc
      */

@@ -4,8 +4,10 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.MappedSuperclass;
 
 /**
  * <p>
@@ -14,13 +16,14 @@ import lombok.Data;
  * 
  * @author MinhNgoc
  */
-@Data
-@AllArgsConstructor
+@MappedSuperclass
 public abstract class AbstractModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private String createdBy;
-    private LocalDateTime createdDateBy;
-    private String updateBy;
-    private LocalDateTime updateDateBy;
+//    private String createdBy;
+    @CreationTimestamp
+    private LocalDateTime thoiGianTao;
+//    private String updateBy;
+    @UpdateTimestamp
+    private LocalDateTime thoiGianUpdate;
 }

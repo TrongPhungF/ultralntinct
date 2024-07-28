@@ -3,8 +3,8 @@ package com.org.ultralntinct.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.org.ultralntinct.dao.SanPhamDAO;
 import com.org.ultralntinct.dao.impl.SanPhamDAOImpl;
+import com.org.ultralntinct.dao.jpa.SanPhamDAO;
 import com.org.ultralntinct.model.SanPham;
 
 import jakarta.servlet.ServletException;
@@ -19,17 +19,18 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author MinhNgoc
  */
+
 public class SanPhamController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    SanPhamDAO sanPhamDAO = new SanPhamDAOImpl();
+    private SanPhamDAO sanPhamDAO;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
     public SanPhamController() {
-        super();
+        sanPhamDAO = new SanPhamDAOImpl();
     }
 
     /**

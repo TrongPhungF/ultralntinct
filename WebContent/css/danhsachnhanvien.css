@@ -103,3 +103,18 @@ body {
     background-color: white;
     color: black;
 }
+
+  .plus{
+   position: absolute;
+    width: 40px;
+    top: 10px;
+    height: 38px;
+    border: none;
+    margin-left: -40px;
+}
+
+.plus:hover{
+    color: #ddd;
+    opacity: 80%;
+}
+

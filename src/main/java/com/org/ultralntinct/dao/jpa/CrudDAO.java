@@ -1,4 +1,4 @@
-package com.org.ultralntinct.dao;
+package com.org.ultralntinct.dao.jpa;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +10,7 @@ import java.util.Optional;
  *
  * @author MinhNgoc
  */
-public interface CRUDDao<T, ID> {
+public interface CrudDAO<T, ID> {
 
     /**
      * <p>
@@ -24,12 +24,12 @@ public interface CRUDDao<T, ID> {
 
     /**
      * <p>
-     * Update entity by id
+     * Update entity
      * </p>
      * @param entity T
      * @author MinhNgoc
      */
-    void update(T entity, ID id);
+    void update(T entity);
 
     /**
      * <p>

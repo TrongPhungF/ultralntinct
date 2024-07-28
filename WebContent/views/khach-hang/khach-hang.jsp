@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultra Instinct</title>
     <jsp:include page="/views/page/header.jsp"/>
-    <link rel="stylesheet" href="css/chitiethoadon.css">
+    <link rel="stylesheet" href="css/quanlykhachhang.css">
     <style>
         .radio-inline {
             display: inline-block;
@@ -23,7 +23,7 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
                     <input class="form-control" placeholder="Tìm mã khách hàng">
-                    <a href="ChiTietKhachHangForm.html"><i class="fa-solid fa-plus plus" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></a>
+                    <a href="${pageContext.request.contextPath}/chi-tiet-khach-hang"><i class="fa-solid fa-plus plus" ></i></a>
                     <div>
                         <a href="KhachHangForm.html" class="btn custom-btn ms-3" type="button">Danh sách</a>
                     </div>          

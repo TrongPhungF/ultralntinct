@@ -1,6 +1,11 @@
 package com.org.ultralntinct.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import com.org.ultralntinct.dao.impl.NhanVienDAOImpl;
+import com.org.ultralntinct.dao.jpa.NhanVienDAO;
+import com.org.ultralntinct.model.NhanVien;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,11 +18,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class NhanVienController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private NhanVienDAO nhanVienDAO;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public NhanVienController() {
-        super();
+        nhanVienDAO = new NhanVienDAOImpl();
         // TODO Auto-generated constructor stub
     }
 
@@ -28,6 +35,9 @@ public class NhanVienController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO Auto-generated method stub
+        List<NhanVien> nhanVienList = nhanVienDAO.findAll();
+        nhanVienList.forEach(t -> System.out.println(t.toString()));
+        request.setAttribute("nhanVienList", nhanVienList);
         request.getRequestDispatcher("/views/nhan-vien/nhan-vien.jsp").forward(request, response);
     }
 

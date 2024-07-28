@@ -1,4 +1,4 @@
-package com.org.ultralntinct.dao;
+package com.org.ultralntinct.dao.jpa;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.org.ultralntinct.model.HoaDonChiTiet;
  *
  * @author MinhNgoc.
  */
-public interface HoaDonDAO extends CRUDDao<HoaDon, Long> {
+public interface HoaDonDAO extends CrudDAO<HoaDon, Long> {
 
     /**
      * <p>

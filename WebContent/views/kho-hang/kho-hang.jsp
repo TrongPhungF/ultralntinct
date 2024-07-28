@@ -18,7 +18,7 @@
             <div class="input-group">
                 <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
                 <input class="form-control" placeholder="Tìm mã phiếu nhập, mã sản phẩm">
-                <a href="ChiTietKhoHangForm.html"><i class="fa-solid fa-plus plus"></i></a>
+                <a href="${pageContext.request.contextPath}/chi-tiet-kho-hang"><i class="fa-solid fa-plus plus"></i></a>
             </div>
             <table class="table">
                 <thead>
@@ -169,6 +169,6 @@
             </div>
         </div>
     </div>
-footer    <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
+ <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
 </body>
 </html>

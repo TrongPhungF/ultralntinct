@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: #ECEEF0;
     padding: 0px;
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
@@ -10,18 +10,20 @@ body {
     height: auto;
     border-right: 1px solid #ddd;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    padding-top: 10px;
+    padding-top: 10px 0;
     padding-bottom: 17px;
 }
 
 .logo-container {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 50px;
+    padding: 10px 0;
 }
 
 .logo {
     margin-left: 30px;
+    margin-top: 0px;
     width: 200px;
 }
 
@@ -36,7 +38,7 @@ body {
 .nav-item .select {
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
-    margin-left: 235px;
+    margin-left: 241px;
     margin-top: -15px;
     display: none;
     position: absolute;
@@ -84,61 +86,212 @@ body {
     margin-top: 170px;
 }
 
-.plus{
+
+
+.plus {
     position: absolute;
-    width: 40px;
-    left: 850px;
+    right: 5px;
     top: 10px;
-    height: 38px;
-    border: none;
-    text-align: center;
-    justify-items: center;
+    width: 40px;
+    height: 40px;
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.plus:hover{
-    color: #ddd;
-    opacity: 80%;
-}
+
 .custom-btn {
-    width: 200px; 
-    border-radius: 10px; 
+    width: 200px;
+    border-radius: 10px;
     background-color: #27AE60;
     color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
+
+.custom-btn:hover {
+    background-color: #1e874b;
+}
+
 .custom1-btn {
     width: 100px;
     margin-left: 20px;
-    border-radius: 10px; 
+    border-radius: 10px;
     background-color: #27AE60;
     color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-.custom2-btn { 
+
+.custom1-btn:hover {
+    background-color: #1e874b;
+}
+
+.custom2-btn {
     width: 50px;
-    margin-left: 20px;   
-    border-radius: 10px; 
+    margin-left: 20px;
+    border-radius: 10px;
     background-color: white;
     color: black;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom2-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.setting {
+    margin-top: 170px;
 }
 
 .dropend > .nav-label.dropdown-toggle::after {
     display: none;
 }
 
-.dropdown-menu{
+.dropdown-menu {
     width: 200px;
 }
 
 .dropdown-menu li {
     animation: slideUp 0.3s ease forwards;
-  }
-  
-  @keyframes slideUp {
+}
+
+@keyframes slideUp {
     0% {
-      transform: translateY(100%);
-      opacity: 0;
+        transform: translateY(100%);
+        opacity: 0;
     }
     100% {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
+
+.info-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.info-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.info-item {
+    flex: 1;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table-sm th,
+.table-sm td {
+    padding: 0.3rem;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+    border-bottom-width: 2px;
+}
+
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+    border: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+    background-color: #b8daff;
+}
+
+.table-hover .table-primary:hover {
+    background-color: #9fcdff;
+}
+
+.table-hover .table-primary:hover > td,
+.table-hover .table-primary:hover > th {
+    background-color: #9fcdff;
+}
+
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filter-item {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.filter-item:last-child {
+    margin-right: 0;
+}
+
+.filter-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+

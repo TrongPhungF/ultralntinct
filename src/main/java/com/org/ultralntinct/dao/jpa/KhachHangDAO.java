@@ -1,4 +1,4 @@
-package com.org.ultralntinct.dao;
+package com.org.ultralntinct.dao.jpa;
 
 import java.sql.SQLException;
 
@@ -11,7 +11,7 @@ import com.org.ultralntinct.model.KhachHang;
  *
  * @author MinhNgoc.
  */
-public interface KhachHangDAO extends CRUDDao<KhachHang, Long> {
+public interface KhachHangDAO extends CrudDAO<KhachHang, Long> {
 
     /**
      * <p>

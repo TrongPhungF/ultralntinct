@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BaoCaoKhachHangController
  */
+
 public class BaoCaoKhachHangController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

@@ -1,4 +1,4 @@
-package com.org.ultralntinct.dao;
+package com.org.ultralntinct.dao.jpa;
 
 import com.org.ultralntinct.dto.UserSession;
 
