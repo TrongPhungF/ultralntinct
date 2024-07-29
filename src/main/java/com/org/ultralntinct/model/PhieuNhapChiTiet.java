@@ -1,7 +1,16 @@
 package com.org.ultralntinct.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,21 +27,35 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "PhieuNhapChiTiet")
 public class PhieuNhapChiTiet implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long PNCTNo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pNCTNo")
+    private Long pNCTNo;
 
+    @Column(name = "maPNCT", unique = true)
     private String maPNCT;
 
-    private float giaNhap;
+    @Column(name = "giaNhap")
+    private BigDecimal giaNhap;
 
+    @Column(name = "soLuong")
     private int soLuong;
 
-    private String maSanPham;
+    @ManyToOne
+    @JoinColumn(name = "maSanPham", referencedColumnName = "maSanPham")
+    private SanPham sanPham;
 
-    private String maNhaCungCap;
+    @ManyToOne
+    @JoinColumn(name = "maNhaCungCap", referencedColumnName = "maNhaCungCap")
+    private NhaCungCap nhaCungCap;
 
-    private String maNhapKho;
+    @ManyToOne
+    @JoinColumn(name = "maNhapKho", referencedColumnName = "maNhapKho")
+    private NhapKho nhapKho;
 }

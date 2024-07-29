@@ -1,7 +1,16 @@
 package com.org.ultralntinct.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,21 +27,34 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "HoaDonChiTiet")
 public class HoaDonChiTiet implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long HDCTNo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hDCTNo")
+    private Long hDCTNo;
 
+    @Column(name = "maHDCT", unique = true)
     private String maHDCT;
 
-    private float giaBan;
+    @Column(name = "giaBan")
+    private BigDecimal giaBan;
 
+    @Column(name = "soLuong")
     private int soLuong;
 
+    @Column(name = "ghiChu")
     private String ghiChu;
 
-    private String maHoaDon;
+    @ManyToOne
+    @JoinColumn(name = "maSanPham", referencedColumnName = "maSanPham")
+    private SanPham sanPham;
 
-    private String maSanPham;
+    @ManyToOne
+    @JoinColumn(name = "maHoaDon", referencedColumnName = "maHoaDon")
+    private HoaDon hoaDon;
 }

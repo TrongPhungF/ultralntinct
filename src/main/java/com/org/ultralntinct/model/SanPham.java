@@ -2,6 +2,7 @@ package com.org.ultralntinct.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,7 +42,7 @@ public class SanPham implements Serializable {
     @Column(name = "sanPhamNo")
     private Long sanPhamNo;
 
-    @Column(name = "maSanPham")
+    @Column(name = "maSanPham",unique = true)
     private String maSanPham;
 
     @Column(name = "tenSanPham")
@@ -58,5 +60,11 @@ public class SanPham implements Serializable {
     @ManyToOne
     @JoinColumn(name = "maLoaiSanPham", referencedColumnName = "maLoaiSanPham")
     private LoaiSanPham loaiSanPham;
+
+    @OneToMany(mappedBy = "sanPham")
+    private List<HoaDonChiTiet> hoaDonChiTietList;
+
+    @OneToMany(mappedBy = "sanPham")
+    private List<PhieuNhapChiTiet> phieuNhapChiTietList;
 
 }

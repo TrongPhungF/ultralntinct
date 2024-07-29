@@ -72,4 +72,6 @@ public class KhachHang
     @OneToMany(mappedBy = "khachHang")
     private List<DiaChi> diaChiList;
 
+    @OneToMany(mappedBy = "khachHang")
+    private List<HoaDon> hoaDonList;
 }

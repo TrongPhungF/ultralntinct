@@ -1,7 +1,6 @@
 package com.org.ultralntinct.config;
 
 
-
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -13,67 +12,48 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-
 /**
-
  * <p>
-
+ * <p>
  * SqlConfig class relate config connection sql.
-
- * </p>
-
  *
-
+ * </p>
+ *
  * @author MinhNgoc.
-
  */
 
 public class SqlConfig {
 
 
-
     /**
-
      * LOGGER
-
      */
 
     private static final Logger LOGGER = Logger.getLogger(SqlConfig.class.getName());
 
 
-
     /**
-
      * connection
-
      */
 
     private static Connection connection;
 
 
-
     private SqlConfig() {
-
-        
 
     }
 
 
-
     /**
-
      * <p>
-
+     * <p>
      * Method config connection sql
-
-     * </p>
-
      *
-
+     * </p>
+     *
      * @return Connection
-
-     * @throws Exception 
-
+     *
+     * @throws Exception
      */
 
     public static synchronized Connection getConnection() throws Exception {
@@ -92,13 +72,9 @@ public class SqlConfig {
 
             String sqlDatabase = "DuAn_QuanLyCuaHang";
 
-
-
             String url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s",
 
                 sqlHost, sqlPort, sqlDatabase);
-
-
 
             try {
 
