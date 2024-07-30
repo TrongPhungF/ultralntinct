@@ -44,7 +44,7 @@ public class AwsConfig {
      * Get S3 Client.
      * </p>
      *
-     * @author phung.
+     * @author MinhNgoc.
      */
     public S3Client getS3Client() {
         return S3Client.builder().region(region)
@@ -55,6 +55,7 @@ public class AwsConfig {
      * <p>
      * Get S3 Presigner.
      * </p>
+     * @author MinhNgoc.
      */
     public S3Presigner getS3Presigner() {
         return S3Presigner.builder()
