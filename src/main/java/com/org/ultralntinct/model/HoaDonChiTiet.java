@@ -35,7 +35,7 @@ public class HoaDonChiTiet implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hDCTNo")
+    @Column(name = "HDCTNo")
     private Long hDCTNo;
 
     @Column(name = "maHDCT", unique = true)
