@@ -1,10 +1,12 @@
 package com.org.ultralntinct;
 
 import java.io.File;
+import java.time.LocalDateTime;
 
 import com.org.ultralntinct.dao.impl.SanPhamDAOImpl;
 import com.org.ultralntinct.dao.jpa.SanPhamDAO;
 import com.org.ultralntinct.service.S3Service;
+import com.org.ultralntinct.utils.DateUtil;
 
 public class Main {
 
@@ -34,15 +36,19 @@ public class Main {
         // for (Bucket bucket : buckets) {
         // System.out.println(bucket.name());
         // }
-        File file = new File("C:\\Users\\phung\\Pictures\\z4659433629006_7dad5fa299a59ed1b91e213a867ea08c.jpg");
+//        File file = new File("");
+        File file = new File("");
 
         // s3Service.uploadObject("duanquanlycuahang",
         // "aws/z4659433629006_7dad5fa299a59ed1b91e213a867ea08c.jpg", file);
 
-        String s3 = "%s/%s/%s/%s".formatted("user", "sanpham", "SP001", file.getName());
-
-        // String s3 =
-        s3Service.generatePresignedUrl("aws/z4659433629006_7dad5fa299a59ed1b91e213a867ea08c.jpg", "duanquanlycuahang");
+        String fileName = DateUtil.convertPatternLocalDateTimeToString(LocalDateTime.now(), DateUtil.DATE_TIME_PATTERN)
+                .concat("_").concat(file.getName());
+        String keys3 = "%s/%s/%s/%s".formatted("user", "sanpham", "SP001", fileName);
+        s3Service.uploadObject("duanquanlycuahang", keys3, file);
+        String s3 = s3Service.generatePresignedUrl(
+                "user/sanpham/SP001/20240731143103_z4659433629006_7dad5fa299a59ed1b91e213a867ea08c.jpg",
+                "duanquanlycuahang");
         System.out.println(s3);
         // Tìm tất cả KhachHang
         // List<DiaChi> diaChiList = diaChiDao.findAll();
