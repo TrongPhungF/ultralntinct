@@ -17,17 +17,15 @@
     <jsp:include page="/views/page/nav.jsp"/>
     <div class="col-9 m-2">
         <div class="p-2" style="margin-left: 20px;">
-          <div class="input-group mb-3">
-    <form action="${pageContext.request.contextPath}/san-pham" class="search-form">
-        <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input class="form-control" name="sanPhamKeySearch" placeholder="Tìm mã sản phẩm, tên sản phẩm">
-        <a href="${pageContext.request.contextPath}/chi-tiet-san-pham" class="plus-link"><i class="fa-solid fa-plus plus"></i></a>
-        <button class="btn custom-btn ms-1" type="submit">Tìm kiếm</button>
-    </form>
-<%--                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham" class="plus"><i class="fa-solid fa-plus"></i></a>--%>
-<%--                <div>--%>
-<%--                    <a href="SanPhamForm.html" class="btn custom-btn ms-3" type="button">Danh sách</a>--%>
-<%--                </div>--%>
+            <div class="input-group mb-3">
+                <form action="${pageContext.request.contextPath}/san-pham" class="search-form">
+                    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input class="form-control" name="sanPhamKeySearch" placeholder="Tìm mã sản phẩm, tên sản phẩm">
+                    <a href="${pageContext.request.contextPath}/chi-tiet-san-pham" class="plus-link">
+                        <i class="fa-solid fa-plus plus"></i>
+                    </a>
+                    <button class="btn custom-btn ms-1" type="submit">Tìm kiếm</button>
+                </form>
             </div>
             <div class="invoice-details p-3 border rounded mt-4"
                  style="background-color: #F5F5F5; color: dimgray;">
@@ -41,19 +39,32 @@
                         <th scope="col" style="color: dimgray;">Tên sản phẩm</th>
                         <th scope="col" style="color: dimgray;">Giá niêm yết</th>
                         <th scope="col" style="color: dimgray;">Hình</th>
-                        <th scope="col" style="color: dimgray;"></th>
-                        <th scope="col" style="color: dimgray;"></th>
+                        <th scope="col" style="color: dimgray;">Chỉnh sửa</th>
+                        <th scope="col" style="color: dimgray;">Xóa</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="sanPham" items="${sanPhamList}" varStatus="status">
                         <tr>
-                        <td><c:out value="${status.index + 1}"/></td>
+                            <td><c:out value="${status.index + 1}"/></td>
                             <td><c:out value="${sanPham.maSanPham}"/></td>
                             <td><c:out value="${sanPham.loaiSanPham.maLoaiSanPham}"/></td>
                             <td><c:out value="${sanPham.tenSanPham}"/></td>
                             <td><c:out value="${sanPham.giaNiemYet}"/></td>
-                            <td>    <img src="${sanPham.hinh}" alt="Hình sản phẩm" width="100" height="100"/>
+                            <td><img src="${sanPham.hinh}" alt="Hình sản phẩm" width="100" height="100"/></td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham?sanPhamNo=${sanPham.sanPhamNo}" class="btn btn-link">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <form action="${pageContext.request.contextPath}/san-pham" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <input type="hidden" name="sanPhamNo" value="${sanPham.sanPhamNo}">
+                                    <button type="submit" class="btn btn-link">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>

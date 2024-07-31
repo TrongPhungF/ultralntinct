@@ -80,7 +80,6 @@ body {
 
 .plus {
     position: absolute;
-    
     right: 220px;
     width: 40px;
     height: 40px;
@@ -298,14 +297,12 @@ a {
 }
 .input-group {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     gap: 10px; /* Khoảng cách giữa các phần tử */
 }
 
 .search-form {
     display: flex;
-    align-items: center;
     width: 100%;
 }
 
@@ -313,7 +310,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
+    padding: 0.75rem;
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
     border-radius: 0.25rem 0 0 0.25rem;
@@ -328,7 +325,7 @@ a {
 
 .custom-btn {
     padding: 0.5rem 1rem;
-    background-color: #007bff;
+    background-color:#1e874b;
     color: #fff;
     border: none;
     border-radius: 0.25rem;
@@ -336,7 +333,7 @@ a {
 }
 
 .custom-btn:hover {
-    background-color: #0056b3;
+    background-color: #1e874b;
 }
 
 .plus-link {
@@ -345,14 +342,17 @@ a {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: #007bff;
+    color: #1e874b;
 }
 
 .plus-link:hover {
-    color: #0056b3;
+    color: #1e874b;
 }
-
+.fa-solid:hover{
+	
+}
 .plus {
     font-size: 1.2rem;
+     height:20px;
 }
 

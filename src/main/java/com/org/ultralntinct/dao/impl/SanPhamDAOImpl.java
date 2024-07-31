@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import com.org.ultralntinct.config.JpaConfig;
 import com.org.ultralntinct.dao.jpa.SanPhamDAO;
-import com.org.ultralntinct.model.DiaChi;
 import com.org.ultralntinct.model.SanPham;
 
 import jakarta.persistence.EntityManager;
@@ -21,8 +20,7 @@ import jakarta.persistence.TypedQuery;
  * @author MinhNgoc.
  */
 public class SanPhamDAOImpl implements SanPhamDAO {
-
-    @Override
+	@Override
     public void save(SanPham entity) {
         EntityManager em = JpaConfig.getEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -86,9 +84,9 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            DiaChi video = em.find(DiaChi.class, id);
-            if (video != null) {
-                em.remove(video);
+            SanPham entity = em.find(SanPham.class, id);
+            if (entity != null) {
+                em.remove(entity);
             }
             transaction.commit();
         } catch (Exception e) {
@@ -103,7 +101,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
     @Override
     public long getMaxMaSanPham() throws SQLException {
-        // TODO Auto-generated method stub
+        // Implementation for this method if needed
         return 0;
     }
 
@@ -111,7 +109,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
     public List<SanPham> searchSanPham(String keySearch) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
-            String jpql = "SELECT s FROM SanPham s Where s.maSanPham = :keySearch OR s.tenSanPham LIKE CONCAT('%', :keySearch, '%')";
+            String jpql = "SELECT s FROM SanPham s WHERE s.maSanPham = :keySearch OR s.tenSanPham LIKE CONCAT('%', :keySearch, '%')";
             TypedQuery<SanPham> query = em.createQuery(jpql, SanPham.class);
             query.setParameter("keySearch", keySearch);
             return query.getResultList();
@@ -119,5 +117,4 @@ public class SanPhamDAOImpl implements SanPhamDAO {
             em.close();
         }
     }
-
 }
