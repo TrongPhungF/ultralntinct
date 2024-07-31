@@ -1,15 +1,12 @@
 package com.org.ultralntinct;
 
-import java.util.List;
+import java.io.File;
+import java.time.LocalDateTime;
 
-import com.org.ultralntinct.config.AwsConfig;
 import com.org.ultralntinct.dao.impl.SanPhamDAOImpl;
 import com.org.ultralntinct.dao.jpa.SanPhamDAO;
 import com.org.ultralntinct.service.S3Service;
-
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.Bucket;
-import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import com.org.ultralntinct.utils.DateUtil;
 
 public class Main {
 
@@ -29,17 +26,30 @@ public class Main {
 
         // List<Bucket> buckets = s3Service.listBuckets();
 
-        AwsConfig awsConfig = new AwsConfig();
-        S3Client s3Client = awsConfig.getS3Client();
-        S3Presigner s3Presigner = awsConfig.getS3Presigner();
-        S3Service s3Service = new S3Service(s3Client, s3Presigner);
+        // AwsConfig awsConfig = new AwsConfig();
+        // S3Client s3Client = awsConfig.getS3Client();
+        // S3Presigner s3Presigner = awsConfig.getS3Presigner();
+        S3Service s3Service = new S3Service();
         // Display the bucket names
-        List<Bucket> buckets = s3Service.listBuckets();
-        System.out.println("Buckets:");
-        for (Bucket bucket : buckets) {
-            System.out.println(bucket.name());
-        }
+        // List<Bucket> buckets = s3Service.listBuckets();
+        // System.out.println("Buckets:");
+        // for (Bucket bucket : buckets) {
+        // System.out.println(bucket.name());
+        // }
+//        File file = new File("");
+        File file = new File("");
 
+        // s3Service.uploadObject("duanquanlycuahang",
+        // "aws/z4659433629006_7dad5fa299a59ed1b91e213a867ea08c.jpg", file);
+
+        String fileName = DateUtil.convertPatternLocalDateTimeToString(LocalDateTime.now(), DateUtil.DATE_TIME_PATTERN)
+                .concat("_").concat(file.getName());
+        String keys3 = "%s/%s/%s/%s".formatted("user", "sanpham", "SP001", fileName);
+        s3Service.uploadObject("duanquanlycuahang", keys3, file);
+        String s3 = s3Service.generatePresignedUrl(
+                "user/sanpham/SP001/20240731143103_z4659433629006_7dad5fa299a59ed1b91e213a867ea08c.jpg",
+                "duanquanlycuahang");
+        System.out.println(s3);
         // Tìm tất cả KhachHang
         // List<DiaChi> diaChiList = diaChiDao.findAll();
         // diaChiList.forEach(diaChi -> System.out.println(diaChi.toString()));
