@@ -1,6 +1,8 @@
 package com.org.ultralntinct.service;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
 import java.util.List;
 
@@ -83,6 +85,15 @@ public class S3Service {
     public void uploadObject(String bucketName, String key, File file) {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(key).build();
         RequestBody requestBody = RequestBody.fromFile(file);
+        s3Client.putObject(putObjectRequest, requestBody);
+    }
+
+    // Create (Upload) an object
+    public void uploadObject(String bucketName, String key, InputStream inputStream) throws IOException {
+        byte[] contentBytes = inputStream.readAllBytes();
+        long contentLength = contentBytes.length;
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(key).build();
+        RequestBody requestBody = RequestBody.fromBytes(contentBytes);
         s3Client.putObject(putObjectRequest, requestBody);
     }
 

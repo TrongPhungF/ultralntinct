@@ -68,6 +68,10 @@ public class Constant {
      * TABLE_NAME HoaDon
      */
     public static final String HOA_DON_TABLE_NAME = "HoaDon";
+    
+    public static final String BUCKET_NAME_S3 = "duanquanlycuahang";
+
+    public static final String S3_FORDER = "%s/%s/%s";
 
     private Constant() {
         throw new IllegalStateException("Utility class");

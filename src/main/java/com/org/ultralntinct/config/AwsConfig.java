@@ -31,11 +31,16 @@ public class AwsConfig {
      * @author MinhNgoc.
      */
     public AwsConfig() {
-        Dotenv dotenv = Dotenv.load();
-        this.region = Region.of(dotenv.get("AWS_CLOUD_REGION"));
+//        Dotenv dotenv = Dotenv.load();
+//        this.region = Region.of(dotenv.get("AWS_CLOUD_REGION"));
+//        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(
+//                dotenv.get("AWS_CLOUD_S3_ACCESS_KEY_ID"),
+//                dotenv.get("AWS_CLOUD_S3_SECRET_ACCESS_KEY"));
+//        this.credentialsProvider = StaticCredentialsProvider.create(awsCreds);
+                this.region = Region.of(("us-east-1"));
         AwsBasicCredentials awsCreds = AwsBasicCredentials.create(
-                dotenv.get("AWS_CLOUD_S3_ACCESS_KEY_ID"),
-                dotenv.get("AWS_CLOUD_S3_SECRET_ACCESS_KEY"));
+                "",
+                "");
         this.credentialsProvider = StaticCredentialsProvider.create(awsCreds);
     }
 

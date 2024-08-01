@@ -1,9 +1,9 @@
 package com.org.ultralntinct.dao.jpa;
 
+import com.org.ultralntinct.model.SanPham;
 import java.sql.SQLException;
 import java.util.List;
-
-import com.org.ultralntinct.model.SanPham;
+import java.util.Optional;
 
 /**
  * <p>
@@ -35,4 +35,7 @@ public interface SanPhamDAO extends CrudDAO<SanPham, Long> {
      * @author MinhNgoc
      */
     List<SanPham> searchSanPham(String keySearch);
+
+    Optional<SanPham> findByMaSanPham(String maSanPham);
+
 }

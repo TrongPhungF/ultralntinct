@@ -53,7 +53,7 @@
                             <td><c:out value="${sanPham.giaNiemYet}"/></td>
                             <td><img src="${sanPham.hinh}" alt="Hình sản phẩm" width="100" height="100"/></td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham?sanPhamNo=${sanPham.sanPhamNo}" class="btn btn-link">
+                                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham?maSanPham=${sanPham.maSanPham}" class="btn btn-link">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                             </td>

@@ -1,16 +1,13 @@
 package com.org.ultralntinct.dao.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-
 import com.org.ultralntinct.config.JpaConfig;
-import com.org.ultralntinct.dao.jpa.SanPhamDAO;
-import com.org.ultralntinct.model.SanPham;
-
+import com.org.ultralntinct.dao.jpa.LoaiSanPhamDAO;
+import com.org.ultralntinct.model.LoaiSanPham;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -19,9 +16,10 @@ import jakarta.persistence.TypedQuery;
  *
  * @author MinhNgoc.
  */
-public class SanPhamDAOImpl implements SanPhamDAO {
-	@Override
-    public void save(SanPham entity) {
+public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
+
+    @Override
+    public void save(LoaiSanPham entity) {
         EntityManager em = JpaConfig.getEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -39,7 +37,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
     }
 
     @Override
-    public void update(SanPham entity) {
+    public void update(LoaiSanPham entity) {
         EntityManager em = JpaConfig.getEntityManager();
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -57,10 +55,10 @@ public class SanPhamDAOImpl implements SanPhamDAO {
     }
 
     @Override
-    public Optional<SanPham> findById(Long id) {
+    public Optional<LoaiSanPham> findById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
-            SanPham entity = em.find(SanPham.class, id);
+            LoaiSanPham entity = em.find(LoaiSanPham.class, id);
             return entity != null ? Optional.of(entity) : Optional.empty();
         } finally {
             em.close();
@@ -68,11 +66,11 @@ public class SanPhamDAOImpl implements SanPhamDAO {
     }
 
     @Override
-    public List<SanPham> findAll() {
+    public List<LoaiSanPham> findAll() {
         EntityManager em = JpaConfig.getEntityManager();
         try {
-            String jpql = "SELECT s FROM SanPham s";
-            return em.createQuery(jpql, SanPham.class).getResultList();
+            String jpql = "SELECT s FROM LoaiSanPham s";
+            return em.createQuery(jpql, LoaiSanPham.class).getResultList();
         } finally {
             em.close();
         }
@@ -84,7 +82,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            SanPham entity = em.find(SanPham.class, id);
+            LoaiSanPham entity = em.find(LoaiSanPham.class, id);
             if (entity != null) {
                 em.remove(entity);
             }
@@ -100,33 +98,14 @@ public class SanPhamDAOImpl implements SanPhamDAO {
     }
 
     @Override
-    public long getMaxMaSanPham() throws SQLException {
-        // Implementation for this method if needed
-        return 0;
-    }
-
-    @Override
-    public List<SanPham> searchSanPham(String keySearch) {
+    public Optional<LoaiSanPham> findByMaLoaiSanPham(String maLoaiSanPham) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
-            String jpql = "SELECT s FROM SanPham s WHERE s.maSanPham = :keySearch OR s.tenSanPham LIKE CONCAT('%', :keySearch, '%')";
-            TypedQuery<SanPham> query = em.createQuery(jpql, SanPham.class);
-            query.setParameter("keySearch", keySearch);
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
-    }
+            String jpql = "SELECT s FROM LoaiSanPham s WHERE s.maLoaiSanPham = :maLoaiSanPham";
+            TypedQuery<LoaiSanPham> query = em.createQuery(jpql, LoaiSanPham.class);
+            query.setParameter("maLoaiSanPham", maLoaiSanPham);
 
-    @Override
-    public Optional<SanPham> findByMaSanPham(String maSanPham) {
-        EntityManager em = JpaConfig.getEntityManager();
-        try {
-            String jpql = "SELECT s FROM SanPham s WHERE s.maSanPham = :maSanPham";
-            TypedQuery<SanPham> query = em.createQuery(jpql, SanPham.class);
-            query.setParameter("maSanPham", maSanPham);
-
-            List<SanPham> results = query.getResultList();
+            List<LoaiSanPham> results = query.getResultList();
             if (results.isEmpty()) {
                 return Optional.empty();
             } else {
