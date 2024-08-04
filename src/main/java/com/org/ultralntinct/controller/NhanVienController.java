@@ -8,6 +8,7 @@ import com.org.ultralntinct.dao.jpa.NhanVienDAO;
 import com.org.ultralntinct.model.NhanVien;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class NhanVienController
  */
+@WebServlet(urlPatterns = {"/nhan-vien"})
 public class NhanVienController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

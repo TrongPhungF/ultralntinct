@@ -64,7 +64,7 @@
             <li class="col-sm-12">
                 <img src="img/avatar.jpg" width="50px" height="50px" style="border-radius: 50%; margin-left: 30px; margin-top: 10px;">
                 <b>TANi</b>
-                <a href="${pageContext.request.contextPath}/logout"><i class="fa-solid fa-right-from-bracket float-end nav-item" style="margin-top: 15px; padding: 10px; border-radius: 5px; margin-right: 25px;"></i></a>
+                <a href="${pageContext.request.contextPath}/dang-xuat"><i class="fa-solid fa-right-from-bracket float-end nav-item" style="margin-top: 15px; padding: 10px; border-radius: 5px; margin-right: 25px;"></i></a>
             </li>
         </ul>
     </nav>

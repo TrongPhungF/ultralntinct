@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
-  <filter>
+  <!-- <filter>
     <filter-name>LoginFilter</filter-name>
     <filter-class>com.org.ultralntinct.filter.LoginFilter</filter-class>
   </filter>
@@ -55,6 +55,10 @@
     <servlet-name>AuthController</servlet-name>
     <servlet-class>com.org.ultralntinct.controller.AuthController</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthController</servlet-name>
+    <url-pattern>/dang-nhap</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>BaoCaoDoanhThuController</servlet-name>
     <servlet-class>com.org.ultralntinct.controller.BaoCaoDoanhThuController</servlet-class>
@@ -178,5 +182,5 @@
   <servlet-mapping>
     <servlet-name>ChiTietKhachHangController</servlet-name>
     <url-pattern>/ChiTietKhachHangController</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 </web-app>

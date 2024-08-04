@@ -1,146 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <welcome-file-list>
-    <welcome-file>home.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>HomeController</display-name>
-    <servlet-name>HomeController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.HomeController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HomeController</servlet-name>
-    <url-pattern>/home</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AuthController</display-name>
-    <servlet-name>AuthController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.AuthController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AuthController</servlet-name>
-    <url-pattern>/dang-nhap</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>HoaDonController</display-name>
-    <servlet-name>HoaDonController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.HoaDonController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HoaDonController</servlet-name>
-    <url-pattern>/hoa-don</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SanPhamController</display-name>
-    <servlet-name>SanPhamController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.SanPhamController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SanPhamController</servlet-name>
-    <url-pattern>/san-pham</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>KhoHangController</display-name>
-    <servlet-name>KhoHangController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.KhoHangController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>KhoHangController</servlet-name>
-    <url-pattern>/kho-hang</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BaoCaoDoanhThu</display-name>
-    <servlet-name>BaoCaoDoanhThu</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.BaoCaoDoanhThu</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BaoCaoDoanhThu</servlet-name>
-    <url-pattern>/bao-cao-doanh-thu</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BaoCaoHoaDon</display-name>
-    <servlet-name>BaoCaoHoaDon</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.BaoCaoHoaDon</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BaoCaoHoaDon</servlet-name>
-    <url-pattern>/bao-cao-hoa-don</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BaoCaoKhachHangController</display-name>
-    <servlet-name>BaoCaoKhachHangController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.BaoCaoKhachHangController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BaoCaoKhachHangController</servlet-name>
-    <url-pattern>/bao-cao-khach-hang</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>KhachHangController</display-name>
-    <servlet-name>KhachHangController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.KhachHangController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>KhachHangController</servlet-name>
-    <url-pattern>/khach-hang</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>NhanVienController</display-name>
-    <servlet-name>NhanVienController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.NhanVienController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NhanVienController</servlet-name>
-    <url-pattern>/nhan-vien</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DieuKhoanVaBaoMatController</display-name>
-    <servlet-name>DieuKhoanVaBaoMatController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.DieuKhoanVaBaoMatController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DieuKhoanVaBaoMatController</servlet-name>
-    <url-pattern>/dieu-khoan-va-bao-mat</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ThongBaoController</display-name>
-    <servlet-name>ThongBaoController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.ThongBaoController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ThongBaoController</servlet-name>
-    <url-pattern>/thong-bao</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ThayDoiMatKhauController</display-name>
-    <servlet-name>ThayDoiMatKhauController</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.ThayDoiMatKhauController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ThayDoiMatKhauController</servlet-name>
-    <url-pattern>/thay-doi-mat-khau</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ThongTinTaiKhoan</display-name>
-    <servlet-name>ThongTinTaiKhoan</servlet-name>
-    <servlet-class>com.org.ultralntinct.controller.ThongTinTaiKhoan</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ThongTinTaiKhoan</servlet-name>
-    <url-pattern>/thong-tin-tai-khoan</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<welcome-file-list>
+		<welcome-file>home.jsp</welcome-file>
+	</welcome-file-list>
+	<display-name>PS37328_NguyenThiMinhNgoc_ASM</display-name>
+	<!-- <filter> <filter-name>AppFilter</filter-name> <filter-class>com.org.ultralntinct.filter.AppFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>AppFilter</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
+
+	<!-- <servlet> <description></description> <display-name>HomeController</display-name> 
+		<servlet-name>HomeController</servlet-name> <servlet-class>com.org.ultralntinct.controller.HomeController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>HomeController</servlet-name> 
+		<url-pattern>/home</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>AuthController</display-name> <servlet-name>AuthController</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.AuthController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>AuthController</servlet-name> 
+		<url-pattern>/dang-nhap</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>HoaDonController</display-name> <servlet-name>HoaDonController</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.HoaDonController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>HoaDonController</servlet-name> 
+		<url-pattern>/hoa-don</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>SanPhamController</display-name> <servlet-name>SanPhamController</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.SanPhamController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>SanPhamController</servlet-name> 
+		<url-pattern>/san-pham</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>KhoHangController</display-name> <servlet-name>KhoHangController</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.KhoHangController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>KhoHangController</servlet-name> 
+		<url-pattern>/kho-hang</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>BaoCaoDoanhThu</display-name> <servlet-name>BaoCaoDoanhThu</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.BaoCaoDoanhThu</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>BaoCaoDoanhThu</servlet-name> 
+		<url-pattern>/bao-cao-doanh-thu</url-pattern> </servlet-mapping> <servlet> 
+		<description></description> <display-name>BaoCaoHoaDon</display-name> <servlet-name>BaoCaoHoaDon</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.BaoCaoHoaDon</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>BaoCaoHoaDon</servlet-name> <url-pattern>/bao-cao-hoa-don</url-pattern> 
+		</servlet-mapping> <servlet> <description></description> <display-name>BaoCaoKhachHangController</display-name> 
+		<servlet-name>BaoCaoKhachHangController</servlet-name> <servlet-class>com.org.ultralntinct.controller.BaoCaoKhachHangController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>BaoCaoKhachHangController</servlet-name> 
+		<url-pattern>/bao-cao-khach-hang</url-pattern> </servlet-mapping> <servlet> 
+		<description></description> <display-name>KhachHangController</display-name> 
+		<servlet-name>KhachHangController</servlet-name> <servlet-class>com.org.ultralntinct.controller.KhachHangController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>KhachHangController</servlet-name> 
+		<url-pattern>/khach-hang</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>NhanVienController</display-name> <servlet-name>NhanVienController</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.NhanVienController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>NhanVienController</servlet-name> 
+		<url-pattern>/nhan-vien</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>DieuKhoanVaBaoMatController</display-name> <servlet-name>DieuKhoanVaBaoMatController</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.DieuKhoanVaBaoMatController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>DieuKhoanVaBaoMatController</servlet-name> 
+		<url-pattern>/dieu-khoan-va-bao-mat</url-pattern> </servlet-mapping> <servlet> 
+		<description></description> <display-name>ThongBaoController</display-name> 
+		<servlet-name>ThongBaoController</servlet-name> <servlet-class>com.org.ultralntinct.controller.ThongBaoController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>ThongBaoController</servlet-name> 
+		<url-pattern>/thong-bao</url-pattern> </servlet-mapping> <servlet> <description></description> 
+		<display-name>ThayDoiMatKhauController</display-name> <servlet-name>ThayDoiMatKhauController</servlet-name> 
+		<servlet-class>com.org.ultralntinct.controller.ThayDoiMatKhauController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>ThayDoiMatKhauController</servlet-name> 
+		<url-pattern>/thay-doi-mat-khau</url-pattern> </servlet-mapping> <servlet> 
+		<description></description> <display-name>ThongTinTaiKhoan</display-name> 
+		<servlet-name>ThongTinTaiKhoan</servlet-name> <servlet-class>com.org.ultralntinct.controller.ThongTinTaiKhoan</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>ThongTinTaiKhoan</servlet-name> 
+		<url-pattern>/thong-tin-tai-khoan</url-pattern> </servlet-mapping> -->
 </web-app>
