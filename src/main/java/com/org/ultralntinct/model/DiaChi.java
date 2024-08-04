@@ -34,25 +34,32 @@ public class DiaChi
         // extends AbstractModel
         implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The dia chi no. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "diaChiNo")
     private Long diaChiNo;
 
+    /** The ma dia chi. */
     @Column(name = "maDiaChi")
     private String maDiaChi;
 
+    /** The dia chi. */
     @Column(name = "diaChi")
     private String diaChi;
 
+    /** The dia chi mac dinh. */
     @Column(name = "diaChiMacDinh")
     private String diaChiMacDinh;
 
+    /** The trang thai xoa. */
     @Column(name = "trangThaiXoa")
     private Boolean trangThaiXoa;
 
+    /** The khach hang. */
     @ManyToOne
     @JoinColumn(name = "maKhachHang", referencedColumnName = "maKhachHang")
     private KhachHang khachHang;

@@ -20,7 +20,16 @@ import jakarta.persistence.TypedQuery;
  * @author MinhNgoc.
  */
 public class SanPhamDAOImpl implements SanPhamDAO {
-	@Override
+
+    /**
+     * <p>
+     * The method Save.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
+    @Override
     public void save(SanPham entity) {
         EntityManager em = JpaConfig.getEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -38,6 +47,14 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Update.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
     @Override
     public void update(SanPham entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -56,6 +73,16 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     * @return the optional
+     */
     @Override
     public Optional<SanPham> findById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -67,6 +94,15 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find all.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @return the list
+     */
     @Override
     public List<SanPham> findAll() {
         EntityManager em = JpaConfig.getEntityManager();
@@ -78,6 +114,14 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Delete by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     */
     @Override
     public void deleteById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -99,12 +143,28 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
     }
 
+    /**
+     * Gets the max ma san pham.
+     *
+     * @return the max ma san pham
+     * @throws SQLException the SQL exception
+     */
     @Override
     public long getMaxMaSanPham() throws SQLException {
         // Implementation for this method if needed
         return 0;
     }
 
+    /**
+     * *
+     * <p>
+     * The method Search san pham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param keySearch the key search
+     * @return the list
+     */
     @Override
     public List<SanPham> searchSanPham(String keySearch) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -118,6 +178,16 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find by ma san pham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maSanPham the ma san pham
+     * @return the optional
+     */
     @Override
     public Optional<SanPham> findByMaSanPham(String maSanPham) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -136,4 +206,5 @@ public class SanPhamDAOImpl implements SanPhamDAO {
             em.close();
         }
     }
+
 }

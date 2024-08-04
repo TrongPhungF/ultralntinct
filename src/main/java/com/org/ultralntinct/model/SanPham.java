@@ -35,35 +35,45 @@ import lombok.Setter;
 @Table(name = "SanPham")
 public class SanPham implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The san pham no. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sanPhamNo")
     private Long sanPhamNo;
 
+    /** The ma san pham. */
     @Column(name = "maSanPham",unique = true)
     private String maSanPham;
 
+    /** The ten san pham. */
     @Column(name = "tenSanPham")
     private String tenSanPham;
 
+    /** The gia niem yet. */
     @Column(name = "giaNiemYet")
     private BigDecimal giaNiemYet;
 
+    /** The so luong ton. */
     @Column(name = "soLuongTon")
     private int soLuongTon;
 
+    /** The hinh. */
     @Column(name = "hinh")
     private String hinh;
 
+    /** The loai san pham. */
     @ManyToOne
     @JoinColumn(name = "maLoaiSanPham", referencedColumnName = "maLoaiSanPham")
     private LoaiSanPham loaiSanPham;
 
+    /** The hoa don chi tiet list. */
     @OneToMany(mappedBy = "sanPham")
     private List<HoaDonChiTiet> hoaDonChiTietList;
 
+    /** The phieu nhap chi tiet list. */
     @OneToMany(mappedBy = "sanPham")
     private List<PhieuNhapChiTiet> phieuNhapChiTietList;
 

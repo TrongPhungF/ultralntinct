@@ -9,16 +9,25 @@ import com.org.ultralntinct.model.NhanVien;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 
 /**
  * <p>
- * DiaChiDAOImpl represents a concrete implementation of DiaChiDAO.
+ * The Class NhanVienDAOImpl.
  * </p>
  *
- * @author MinhNgoc.
+ * @author MinhNgoc
  */
 public class NhanVienDAOImpl implements NhanVienDAO {
 
+    /**
+     * <p>
+     * The method Save.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
     @Override
     public void save(NhanVien entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -37,6 +46,14 @@ public class NhanVienDAOImpl implements NhanVienDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Update.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
     @Override
     public void update(NhanVien entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -55,6 +72,16 @@ public class NhanVienDAOImpl implements NhanVienDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     * @return the optional
+     */
     @Override
     public Optional<NhanVien> findById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -66,6 +93,15 @@ public class NhanVienDAOImpl implements NhanVienDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find all.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @return the list
+     */
     @Override
     public List<NhanVien> findAll() {
         EntityManager em = JpaConfig.getEntityManager();
@@ -77,6 +113,14 @@ public class NhanVienDAOImpl implements NhanVienDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Delete by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     */
     @Override
     public void deleteById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -98,4 +142,32 @@ public class NhanVienDAOImpl implements NhanVienDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find by ma nhan vien.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maNhanVien the ma nhan vien
+     * @return the optional
+     */
+    @Override
+    public Optional<NhanVien> findByMaNhanVien(String maNhanVien) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            String jpql = "SELECT nv FROM NhanVien nv WHERE nv.maNhanVien = :maNhanVien";
+            TypedQuery<NhanVien> query = em.createQuery(jpql, NhanVien.class);
+            query.setParameter("maNhanVien", maNhanVien);
+
+            List<NhanVien> results = query.getResultList();
+            if (results.isEmpty()) {
+                return Optional.empty();
+            } else {
+                return Optional.of(results.get(0));
+            }
+        } finally {
+            em.close();
+        }
+    }
 }

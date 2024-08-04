@@ -27,27 +27,44 @@ import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequ
 
 /**
  * <p>
- * S3Service class.
+ * The Class S3Service.
  * </p>
  *
- * @author MinhNgoc.
+ * @author MinhNgoc
  */
 @Log4j2
 @AllArgsConstructor
 public class S3Service {
 
+    /** The s 3 client. */
     private S3Client s3Client;
 
+    /** The s 3 presigner. */
     private S3Presigner s3Presigner;
 
+    /** The aws config. */
     private AwsConfig awsConfig;
 
+    /**
+     * Instantiates a new s 3 service.
+     */
     public S3Service() {
         this.awsConfig = new AwsConfig();
         this.s3Client = awsConfig.getS3Client();
         this.s3Presigner = awsConfig.getS3Presigner();
     }
 
+    /**
+     * *
+     * <p>
+     * The method Generate presigned url.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param value      the value
+     * @param bucketName the bucket name
+     * @return the string
+     */
     public String generatePresignedUrl(String value, String bucketName) {
         if (StringUtils.isNotBlank(value)) {
             String filePathPrefix = bucketName + "/";
@@ -62,6 +79,18 @@ public class S3Service {
         return StringUtils.EMPTY;
     }
 
+    /**
+     * *
+     * <p>
+     * The method Generate presigned url.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param bucketName the bucket name
+     * @param key        the key
+     * @param duration   the duration
+     * @return the string
+     */
     // Generate a pre-signed URL for an object
     public String generatePresignedUrl(String bucketName, String key, Duration duration) {
         GetObjectPresignRequest getObjectPresignRequest = GetObjectPresignRequest.builder().signatureDuration(duration)
@@ -70,6 +99,14 @@ public class S3Service {
         return presignedGetObjectRequest.url().toString();
     }
 
+    /**
+     * Checks if is exit S 3.
+     *
+     * @param bucketName the bucket name
+     * @param key        the key
+     * @return true, if is exit S 3
+     * @author MinhNgoc
+     */
     public boolean isExitS3(String bucketName, String key) {
         try {
             HeadObjectRequest headObjectRequest = HeadObjectRequest.builder().bucket(bucketName).key(key).build();
@@ -81,6 +118,16 @@ public class S3Service {
         }
     }
 
+    /**
+     * <p>
+     * The method Upload object.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param bucketName the bucket name
+     * @param key        the key
+     * @param file       the file
+     */
     // Create (Upload) an object
     public void uploadObject(String bucketName, String key, File file) {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(key).build();
@@ -88,15 +135,34 @@ public class S3Service {
         s3Client.putObject(putObjectRequest, requestBody);
     }
 
+    /**
+     * <p>
+     * The method Upload object.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param bucketName  the bucket name
+     * @param key         the key
+     * @param inputStream the input stream
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     // Create (Upload) an object
     public void uploadObject(String bucketName, String key, InputStream inputStream) throws IOException {
         byte[] contentBytes = inputStream.readAllBytes();
-        long contentLength = contentBytes.length;
         PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(key).build();
         RequestBody requestBody = RequestBody.fromBytes(contentBytes);
         s3Client.putObject(putObjectRequest, requestBody);
     }
 
+    /**
+     * <p>
+     * The method Delete object.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param bucketName the bucket name
+     * @param key        the key
+     */
     // Delete an object
     public void deleteObject(String bucketName, String key) {
         try {
@@ -106,6 +172,15 @@ public class S3Service {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method List buckets.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @return the list
+     */
     // List all buckets
     public List<Bucket> listBuckets() {
         try {

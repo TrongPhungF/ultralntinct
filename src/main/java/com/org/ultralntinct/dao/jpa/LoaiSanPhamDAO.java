@@ -1,7 +1,8 @@
 package com.org.ultralntinct.dao.jpa;
 
-import com.org.ultralntinct.model.LoaiSanPham;
 import java.util.Optional;
+
+import com.org.ultralntinct.model.LoaiSanPham;
 
 /**
  * <p>
@@ -12,6 +13,16 @@ import java.util.Optional;
  */
 public interface LoaiSanPhamDAO extends CrudDAO<LoaiSanPham, Long> {
 
+    /**
+     * *
+     * <p>
+     * The method Find by ma loai san pham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maLoaiSanPham the ma loai san pham
+     * @return the optional
+     */
     Optional<LoaiSanPham> findByMaLoaiSanPham(String maLoaiSanPham);
 
 }

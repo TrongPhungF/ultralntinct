@@ -9,70 +9,51 @@ package com.org.ultralntinct.utils;
  */
 public class Constant {
 
-    /**
-     * INSERT_INTO
-     */
+    /** INSERT_INTO. */
     public static final String INSERT_INTO = "INSERT INTO ";
 
-    /**
-     * UPDATE
-     */
+    /** UPDATE. */
     public static final String UPDATE = "UPDATE ";
 
-    /**
-     * ID with DiaChi
-     */
+    /** ID with DiaChi. */
     public static final String DIA_CHI_NO = "diaChiNo";
 
-    /**
-     * TABLE_NAME DiaChi
-     */
+    /** TABLE_NAME DiaChi. */
     public static final String DIA_CHI_TABLE_NAME = "DiaChi";
 
-    /**
-     * ID with SanPham
-     */
+    /** ID with SanPham. */
     public static final String SAN_PHAM_NO = "SanPhamNo";
 
-    /**
-     * TABLE_NAME SanPham
-     */
+    /** TABLE_NAME SanPham. */
     public static final String SAN_PHAM_TABLE_NAME = "SanPham";
 
-    /**
-     * ID with KhachHang
-     */
+    /** ID with KhachHang. */
     public static final String KHACH_HANG_NO = "KhachHangNo";
 
-    /**
-     * TABLE_NAME KhachHang
-     */
+    /** TABLE_NAME KhachHang. */
     public static final String KHACH_HANG_TABLE_NAME = "KhachHang";
 
-    /**
-     * ID with NhanVien
-     */
+    /** ID with NhanVien. */
     public static final String NHAN_VIEN_NO = "NhanVienNo";
 
-    /**
-     * TABLE_NAME NhanVien
-     */
+    /** TABLE_NAME NhanVien. */
     public static final String NHAN_VIEN_TABLE_NAME = "NhanVien";
 
-    /**
-     * ID with HoaDon
-     */
+    /** ID with HoaDon. */
     public static final String HOA_DON_NO = "hoaDonNo";
 
-    /**
-     * TABLE_NAME HoaDon
-     */
+    /** TABLE_NAME HoaDon. */
     public static final String HOA_DON_TABLE_NAME = "HoaDon";
     
+    /** The Constant BUCKET_NAME_S3. */
     public static final String BUCKET_NAME_S3 = "duanquanlycuahang";
 
-    public static final String S3_FORDER = "%s/%s/%s";
+    /** The Constant S3_FORDER. */
+    public static final String S3_FOLDER = "%s/%s/%s";
 
+    /**
+     * Instantiates a new constant.
+     */
     private Constant() {
         throw new IllegalStateException("Utility class");
     }

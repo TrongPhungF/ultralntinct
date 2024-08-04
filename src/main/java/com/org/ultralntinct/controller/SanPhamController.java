@@ -28,8 +28,9 @@ import jakarta.servlet.http.Part;
 
 /**
  * <p>
- * Servlet implementation class HomeController
+ * Servlet implementation class SanPhamController
  * </p>
+ * .
  *
  * @author MinhNgoc
  */
@@ -38,15 +39,21 @@ import jakarta.servlet.http.Part;
         maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class SanPhamController extends HttpServlet {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The san pham DAO. */
     private final SanPhamDAO sanPhamDAO;
 
+    /** The loai san pham DAO. */
     private final LoaiSanPhamDAO loaiSanPhamDAO;
 
+    /** The s 3 service. */
     private final S3Service s3Service;
 
     /**
+     * Instantiates a new san pham controller.
+     *
      * @see HttpServlet#HttpServlet()
      */
     public SanPhamController() {
@@ -56,6 +63,14 @@ public class SanPhamController extends HttpServlet {
     }
 
     /**
+     * <p>
+     * The method Do get.
+     * </p>
+     *
+     * @param request  the request
+     * @param response the response
+     * @throws ServletException the servlet exception
+     * @throws IOException      Signals that an I/O exception has occurred.
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      *      response)
      */
@@ -63,33 +78,51 @@ public class SanPhamController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String sanPhamKeySearch = request.getParameter("sanPhamKeySearch");
-        List<SanPham> sanPhamList;
-        if (StringUtils.isNotBlank(sanPhamKeySearch)) {
-            sanPhamList = sanPhamDAO.searchSanPham(sanPhamKeySearch);
-        } else {
-            sanPhamList = sanPhamDAO.findAll();
-        }
-        sanPhamList.stream().filter(sanPham -> StringUtils.isNotBlank(sanPham.getHinh())).peek(
-                sanPham -> sanPham.setHinh(s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3)));
-
+        List<SanPham> sanPhamList = StringUtils.isNotBlank(sanPhamKeySearch) ?
+            sanPhamDAO.searchSanPham(sanPhamKeySearch) :
+            sanPhamDAO.findAll();
+        sanPhamList.forEach(sanPham -> {
+            String url = s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3);
+            sanPham.setHinh(url);
+        });
         request.setAttribute("sanPhamList", sanPhamList);
         request.getRequestDispatcher("/views/san-pham/san-pham.jsp").forward(request, response);
     }
 
+    /**
+     * <p>
+     * The method Do post.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param request  the request
+     * @param response the response
+     * @throws ServletException the servlet exception
+     * @throws IOException      Signals that an I/O exception has occurred.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String method = request.getParameter("_method");
-        if ("put".equals(method)) {
+        if ("put".equalsIgnoreCase(method)) {
             doPut(request, response);
-        }
-
-        if ("delete".equals(method)) {
+        } else if ("delete".equalsIgnoreCase(method)) {
             doDelete(request, response);
         }
 
     }
 
+    /**
+     * <p>
+     * The method Creates the or update san pham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param request  the request
+     * @param response the response
+     * @throws IOException      Signals that an I/O exception has occurred.
+     * @throws ServletException the servlet exception
+     */
     private void createOrUpdateSanPham(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
@@ -97,23 +130,62 @@ public class SanPhamController extends HttpServlet {
         String sanPhamNoStr = request.getParameter("sanPhamNo");
         String maSanPhamStr = request.getParameter("maSanPham");
         Optional<SanPham> optionalSanPham = sanPhamDAO.findByMaSanPham(maSanPhamStr);
+
         if (optionalSanPham.isEmpty()) {
-            request.setAttribute("errorMessage", "Không tìm thấy sản phẩm !!!");
-            response.sendRedirect(request.getContextPath() + "/chi-tiet-san-pham?maSanPham=" + maSanPhamStr);
+            redirectToDetailPageWithError(request, response, maSanPhamStr, "Không tìm thấy sản phẩm !!!");
             return;
         }
 
         String maLoaiSanPhamStr = request.getParameter("maLoaiSanPham");
         Optional<LoaiSanPham> optLoaiSanPham = loaiSanPhamDAO.findByMaLoaiSanPham(maLoaiSanPhamStr);
-        LoaiSanPham loaiSanPham = null;
+
         if (optLoaiSanPham.isEmpty()) {
-            request.setAttribute("errorMessage", "Không tìm thấy mã loại sản phẩm !!!");
-            response.sendRedirect(request.getContextPath() + "/chi-tiet-san-pham?maSanPham=" + maSanPhamStr);
+            redirectToDetailPageWithError(request, response, maSanPhamStr, "Không tìm thấy mã loại sản phẩm !!!");
             return;
-        } else {
-            loaiSanPham = optLoaiSanPham.get();
         }
 
+        SanPham sanPham = buildSanPhamFromRequest(request, sanPhamNoStr, optLoaiSanPham.get());
+
+        Part filePart = request.getPart("hinh");
+        String keyFile = generateS3KeyForFile(sanPham.getMaSanPham(), filePart);
+        s3Service.uploadObject(Constant.BUCKET_NAME_S3, keyFile, filePart.getInputStream());
+        sanPham.setHinh(keyFile);
+
+        saveOrUpdateSanPham(sanPham, request);
+
+        response.sendRedirect(request.getContextPath() + "/san-pham");
+    }
+
+    /**
+     * <p>
+     * The method Redirect to detail page with error.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param request      the request
+     * @param response     the response
+     * @param maSanPhamStr the ma san pham str
+     * @param errorMessage the error message
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
+    private void redirectToDetailPageWithError(HttpServletRequest request, HttpServletResponse response, String maSanPhamStr, String errorMessage) throws IOException {
+        request.setAttribute("errorMessage", errorMessage);
+        response.sendRedirect(request.getContextPath() + "/chi-tiet-san-pham?maSanPham=" + maSanPhamStr);
+    }
+
+    /**
+     * *
+     * <p>
+     * The method Builds the san pham from request.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param request      the request
+     * @param sanPhamNoStr the san pham no str
+     * @param loaiSanPham  the loai san pham
+     * @return the san pham
+     */
+    private SanPham buildSanPhamFromRequest(HttpServletRequest request, String sanPhamNoStr, LoaiSanPham loaiSanPham) {
         SanPham sanPham = new SanPham();
         if (StringUtils.isNotBlank(sanPhamNoStr)) {
             sanPham.setSanPhamNo(Long.parseLong(sanPhamNoStr));
@@ -121,19 +193,37 @@ public class SanPhamController extends HttpServlet {
         sanPham.setMaSanPham(request.getParameter("maSanPham"));
         sanPham.setTenSanPham(request.getParameter("tenSanPham"));
         sanPham.setGiaNiemYet(new BigDecimal(request.getParameter("giaNiemYet")));
-
-        Part filePart = request.getPart("hinh");
-
-        StringBuilder fileName = new StringBuilder(
-                DateUtil.convertPatternLocalDateTimeToString(LocalDateTime.now(), DateUtil.DATE_TIME_PATTERN))
-                .append("_").append(FileUtil.getFileName(filePart));
-
-        String keyFile = Constant.S3_FORDER.formatted("san-pham", sanPham.getMaSanPham(), fileName);
-
-        s3Service.uploadObject(Constant.BUCKET_NAME_S3, keyFile, filePart.getInputStream());
-        sanPham.setHinh(keyFile);
         sanPham.setLoaiSanPham(loaiSanPham);
+        return sanPham;
+    }
 
+    /**
+     * *
+     * <p>
+     * The method Generate S 3 key for file.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maSanPham the ma san pham
+     * @param filePart  the file part
+     * @return the string
+     */
+    private String generateS3KeyForFile(String maSanPham, Part filePart) {
+        String timestamp = DateUtil.convertPatternLocalDateTimeToString(LocalDateTime.now(), DateUtil.DATE_TIME_PATTERN);
+        String fileName = timestamp + "_" + FileUtil.getFileName(filePart);
+        return Constant.S3_FOLDER.formatted("san-pham", maSanPham, fileName);
+    }
+
+    /**
+     * <p>
+     * The method Save or update san pham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param sanPham the san pham
+     * @param request the request
+     */
+    private void saveOrUpdateSanPham(SanPham sanPham, HttpServletRequest request) {
         if (sanPham.getSanPhamNo() == null) {
             sanPhamDAO.save(sanPham);
             request.setAttribute("successMessage", "Lưu sản phẩm thành công !!!");
@@ -141,16 +231,36 @@ public class SanPhamController extends HttpServlet {
             sanPhamDAO.update(sanPham);
             request.setAttribute("successMessage", "Cập nhật sản phẩm thành công !!!");
         }
-
-        response.sendRedirect(request.getContextPath() + "/san-pham");
     }
 
+    /**
+     * <p>
+     * The method Do put.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param request  the request
+     * @param response the response
+     * @throws ServletException the servlet exception
+     * @throws IOException      Signals that an I/O exception has occurred.
+     */
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         createOrUpdateSanPham(request, response);
     }
 
+    /**
+     * <p>
+     * The method Do delete.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param request  the request
+     * @param response the response
+     * @throws ServletException the servlet exception
+     * @throws IOException      Signals that an I/O exception has occurred.
+     */
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -13,8 +13,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * <p>
@@ -23,7 +24,8 @@ import lombok.RequiredArgsConstructor;
  *
  * @author MinhNgoc
  */
-@Data
+@Getter
+@Setter
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -31,29 +33,37 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "HoaDonChiTiet")
 public class HoaDonChiTiet implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The h DCT no. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HDCTNo")
     private Long hDCTNo;
 
+    /** The ma HDCT. */
     @Column(name = "maHDCT", unique = true)
     private String maHDCT;
 
+    /** The gia ban. */
     @Column(name = "giaBan")
     private BigDecimal giaBan;
 
+    /** The so luong. */
     @Column(name = "soLuong")
     private int soLuong;
 
+    /** The ghi chu. */
     @Column(name = "ghiChu")
     private String ghiChu;
 
+    /** The san pham. */
     @ManyToOne
     @JoinColumn(name = "maSanPham", referencedColumnName = "maSanPham")
     private SanPham sanPham;
 
+    /** The hoa don. */
     @ManyToOne
     @JoinColumn(name = "maHoaDon", referencedColumnName = "maHoaDon")
     private HoaDon hoaDon;

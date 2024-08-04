@@ -7,7 +7,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * UserSession class with table.
+ * The Class UserSessionBuilder.
  * </p>
  *
  * @author MinhNgoc
@@ -18,16 +18,32 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserSession {
 
+    /** The instance. */
     private static UserSession instance;
 
+    /** The user name. */
     private String userName;
+
+    /** The password. */
     private String password;
+
+    /** The role. */
     private String role;
+
+    /** The information. */
     private String information;
 
+    /**
+     * Instantiates a new user session.
+     */
     private UserSession() {
     }
 
+    /**
+     * Gets the single instance of UserSession.
+     *
+     * @return single instance of UserSession
+     */
     public static UserSession getInstance() {
         if (instance == null) {
             instance = new UserSession();

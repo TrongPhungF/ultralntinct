@@ -1,13 +1,15 @@
 package com.org.ultralntinct.dao.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.org.ultralntinct.config.JpaConfig;
 import com.org.ultralntinct.dao.jpa.LoaiSanPhamDAO;
 import com.org.ultralntinct.model.LoaiSanPham;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * <p>
@@ -18,6 +20,14 @@ import java.util.Optional;
  */
 public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 
+    /**
+     * <p>
+     * The method Save.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
     @Override
     public void save(LoaiSanPham entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -36,6 +46,14 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Update.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
     @Override
     public void update(LoaiSanPham entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -54,6 +72,16 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     * @return the optional
+     */
     @Override
     public Optional<LoaiSanPham> findById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -65,6 +93,15 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find all.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @return the list
+     */
     @Override
     public List<LoaiSanPham> findAll() {
         EntityManager em = JpaConfig.getEntityManager();
@@ -76,6 +113,14 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Delete by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     */
     @Override
     public void deleteById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -97,6 +142,16 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find by ma loai san pham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maLoaiSanPham the ma loai san pham
+     * @return the optional
+     */
     @Override
     public Optional<LoaiSanPham> findByMaLoaiSanPham(String maLoaiSanPham) {
         EntityManager em = JpaConfig.getEntityManager();

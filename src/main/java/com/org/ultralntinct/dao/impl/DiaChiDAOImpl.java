@@ -19,6 +19,14 @@ import jakarta.persistence.EntityTransaction;
  */
 public class DiaChiDAOImpl implements DiaChiDAO {
 
+    /**
+     * <p>
+     * The method Save.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
     @Override
     public void save(DiaChi entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -37,6 +45,14 @@ public class DiaChiDAOImpl implements DiaChiDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Update.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param entity the entity
+     */
     @Override
     public void update(DiaChi entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -55,6 +71,16 @@ public class DiaChiDAOImpl implements DiaChiDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     * @return the optional
+     */
     @Override
     public Optional<DiaChi> findById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -66,6 +92,15 @@ public class DiaChiDAOImpl implements DiaChiDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Find all.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @return the list
+     */
     @Override
     public List<DiaChi> findAll() {
         EntityManager em = JpaConfig.getEntityManager();
@@ -77,6 +112,14 @@ public class DiaChiDAOImpl implements DiaChiDAO {
         }
     }
 
+    /**
+     * <p>
+     * The method Delete by id.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param id the id
+     */
     @Override
     public void deleteById(Long id) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -97,5 +140,4 @@ public class DiaChiDAOImpl implements DiaChiDAO {
             em.close();
         }
     }
-
 }

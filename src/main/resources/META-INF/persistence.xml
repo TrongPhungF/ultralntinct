@@ -7,7 +7,7 @@
             <property name="jakarta.persistence.jdbc.driver"
                     value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
             <property name="jakarta.persistence.jdbc.url"
-                value="jdbc:sqlserver://localhost:1433;database=DuAn_QuanLyCuaHang" />
+                value="jdbc:sqlserver://localhost:1433;database=DuAn2_QuanLyCuaHang" />
             <property name="jakarta.persistence.jdbc.user" value="sa" />
             <property name="jakarta.persistence.jdbc.password" value="1234" />
             <property name="hibernate.show_sql" value="true" />

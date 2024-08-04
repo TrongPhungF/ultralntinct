@@ -6,9 +6,16 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+/**
+ * <p>
+ * The Class EncryptionUtils.
+ * </p>
+ *
+ * @author MinhNgoc
+ */
 public class EncryptionUtils {
 
-//    private static final String SECRET_KEY= "ultralntinct_key";
+    /** The secret key. */
     private static SecretKey secretKey;
 
     static {
@@ -21,6 +28,16 @@ public class EncryptionUtils {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Encrypt.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param data the data
+     * @return the string
+     */
     public static String encrypt(String data) {
         try {
             Cipher cipher = Cipher.getInstance("AES");
@@ -33,6 +50,16 @@ public class EncryptionUtils {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method Decrypt.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param encryptedData the encrypted data
+     * @return the string
+     */
     public static String decrypt(String encryptedData) {
         try {
             Cipher cipher = Cipher.getInstance("AES");

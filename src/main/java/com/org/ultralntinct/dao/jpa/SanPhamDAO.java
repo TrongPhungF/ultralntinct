@@ -1,9 +1,10 @@
 package com.org.ultralntinct.dao.jpa;
 
-import com.org.ultralntinct.model.SanPham;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+
+import com.org.ultralntinct.model.SanPham;
 
 /**
  * <p>
@@ -19,8 +20,9 @@ public interface SanPhamDAO extends CrudDAO<SanPham, Long> {
      * Method get max MaSanPham.
      * </p>
      *
-     * @return long.
      * @author MinhNgoc.
+     * @return long.
+     * @throws SQLException the SQL exception
      */
     long getMaxMaSanPham() throws SQLException;
 
@@ -29,13 +31,22 @@ public interface SanPhamDAO extends CrudDAO<SanPham, Long> {
      * Method searchSanPham.
      * </p>
      *
-     * @param keySearch
-     *            String
-     * @return List of SanPham.
      * @author MinhNgoc
+     * @param keySearch String
+     * @return List of SanPham.
      */
     List<SanPham> searchSanPham(String keySearch);
 
+    /**
+     * *
+     * <p>
+     * The method Find by ma san pham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maSanPham the ma san pham
+     * @return the optional
+     */
     Optional<SanPham> findByMaSanPham(String maSanPham);
 
 }
