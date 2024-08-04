@@ -20,7 +20,7 @@ public class EncryptionUtils {
 
     static {
         try {
-            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            KeyGenerator keyGen = KeyGenerator.getInstance(Constant.AES);
             keyGen.init(128);
             secretKey = keyGen.generateKey();
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class EncryptionUtils {
      */
     public static String encrypt(String data) {
         try {
-            Cipher cipher = Cipher.getInstance("AES");
+            Cipher cipher = Cipher.getInstance(Constant.AES);
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             byte[] encryptedData = cipher.doFinal(data.getBytes());
             return Base64.getEncoder().encodeToString(encryptedData);
@@ -62,7 +62,7 @@ public class EncryptionUtils {
      */
     public static String decrypt(String encryptedData) {
         try {
-            Cipher cipher = Cipher.getInstance("AES");
+            Cipher cipher = Cipher.getInstance(Constant.AES);
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             byte[] decryptedData = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
             return new String(decryptedData);
@@ -70,5 +70,12 @@ public class EncryptionUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * Instantiates a new constant.
+     */
+    private EncryptionUtils() {
+        throw new IllegalStateException("Utility class");
     }
 }
