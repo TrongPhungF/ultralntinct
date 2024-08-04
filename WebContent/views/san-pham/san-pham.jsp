@@ -51,20 +51,22 @@
                             <td><c:out value="${sanPham.loaiSanPham.maLoaiSanPham}"/></td>
                             <td><c:out value="${sanPham.tenSanPham}"/></td>
                             <td><c:out value="${sanPham.giaNiemYet}"/></td>
-                            <td><img src="${sanPham.hinh}" alt="Hình sản phẩm" width="100" height="100"/></td>
+                            <td><img src="${sanPham.hinh != null ? sanPham.hinh : 'img/fenix/7progray.jpg'}" alt="Hình sản phẩm" width="100" height="100"/></td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/chi-tiet-san-pham?maSanPham=${sanPham.maSanPham}" class="btn btn-link">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                             </td>
                             <td>
-                                <form action="${pageContext.request.contextPath}/san-pham" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
-                                    <input type="hidden" name="_method" value="delete">
-                                    <input type="hidden" name="sanPhamNo" value="${sanPham.sanPhamNo}">
-                                    <button type="submit" class="btn btn-link">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </form>
+			                             <form action="${pageContext.request.contextPath}/san-pham" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+									    <input type="hidden" name="_method" value="delete">
+									    <input type="hidden" name="maSanPham" value="${sanPham.maSanPham}">
+									    <button type="submit" class="btn btn-link">
+									        <i class="fa-solid fa-trash-can"></i>
+									    </button>
+									</form>
+
+			            </form>
                             </td>
                         </tr>
                     </c:forEach>

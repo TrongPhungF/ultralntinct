@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -70,11 +71,10 @@ public class SanPham implements Serializable {
     private LoaiSanPham loaiSanPham;
 
     /** The hoa don chi tiet list. */
-    @OneToMany(mappedBy = "sanPham")
+    @OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL)
     private List<HoaDonChiTiet> hoaDonChiTietList;
 
-    /** The phieu nhap chi tiet list. */
-    @OneToMany(mappedBy = "sanPham")
-    private List<PhieuNhapChiTiet> phieuNhapChiTietList;
+	@OneToMany(mappedBy = "sanPham", cascade = CascadeType.ALL)
+	private List<PhieuNhapChiTiet> phieuNhapChiTietList;
 
 }

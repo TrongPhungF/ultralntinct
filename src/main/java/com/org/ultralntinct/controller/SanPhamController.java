@@ -35,8 +35,8 @@ import jakarta.servlet.http.Part;
  * @author MinhNgoc
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50) // 50MB
+		maxFileSize = 1024 * 1024 * 50, // 50MB
+		maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class SanPhamController extends HttpServlet {
 
     /** The Constant serialVersionUID. */
@@ -78,13 +78,17 @@ public class SanPhamController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String sanPhamKeySearch = request.getParameter("sanPhamKeySearch");
-        List<SanPham> sanPhamList = StringUtils.isNotBlank(sanPhamKeySearch) ?
-            sanPhamDAO.searchSanPham(sanPhamKeySearch) :
-            sanPhamDAO.findAll();
-        sanPhamList.forEach(sanPham -> {
-            String url = s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3);
-            sanPham.setHinh(url);
-        });
+        List<SanPham> sanPhamList;
+        if (StringUtils.isNotBlank(sanPhamKeySearch)) {
+            sanPhamList = sanPhamDAO.searchSanPham(sanPhamKeySearch);
+        } else {
+            sanPhamList = sanPhamDAO.findAll();
+        }
+        for (var sanPham: sanPhamList) {
+			String url = s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3);
+			sanPham.setHinh(url);
+		}
+
         request.setAttribute("sanPhamList", sanPhamList);
         request.getRequestDispatcher("/views/san-pham/san-pham.jsp").forward(request, response);
     }
@@ -108,8 +112,9 @@ public class SanPhamController extends HttpServlet {
             doPut(request, response);
         } else if ("delete".equalsIgnoreCase(method)) {
             doDelete(request, response);
+        } else {
+            createOrUpdateSanPham(request, response);
         }
-
     }
 
     /**
@@ -264,8 +269,36 @@ public class SanPhamController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long sanPhamNo = Long.parseLong(request.getParameter("sanPhamNo"));
-        sanPhamDAO.deleteById(sanPhamNo);
-        response.sendRedirect(request.getContextPath() + "/san-pham");
+        String maSanPham = request.getParameter("maSanPham");
+        if (maSanPham != null) {
+            try {
+                // Log for debugging
+                System.out.println("Attempting to delete product with maSanPham: " + maSanPham);
+
+                // Attempt to delete the product
+                sanPhamDAO.deleteByMaSanPham(maSanPham);
+                request.setAttribute("successMessage", "Sản phẩm đã được xóa thành công !!!");
+
+                // Log success
+                System.out.println("Successfully deleted product with maSanPham: " + maSanPham);
+            } catch (Exception e) {
+                // Log the exception for debugging
+                e.printStackTrace();
+                request.setAttribute("errorMessage", "Có lỗi xảy ra khi xóa sản phẩm: " + e.getMessage());
+            }
+        } else {
+            request.setAttribute("errorMessage", "Mã sản phẩm không hợp lệ hoặc không được cung cấp.");
+        }
+
+        // Load updated product list
+        List<SanPham> sanPhamList = sanPhamDAO.findAll();
+        for (SanPham sanPham : sanPhamList) {
+            String url = s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3);
+            sanPham.setHinh(url);
+        }
+        request.setAttribute("sanPhamList", sanPhamList);
+
+        // Forward to product list page
+        request.getRequestDispatcher("/views/san-pham/san-pham.jsp").forward(request, response);
     }
 }

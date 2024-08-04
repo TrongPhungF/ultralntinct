@@ -207,4 +207,36 @@ public class SanPhamDAOImpl implements SanPhamDAO {
         }
     }
 
+    /**
+     * *
+     * <p>
+     * The method deleteByMaSanPham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maSanPham the ma san pham
+     */
+    @Override
+    public void deleteByMaSanPham(String maSanPham) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            String jpql = "SELECT s FROM SanPham s WHERE s.maSanPham = :maSanPham";
+            TypedQuery<SanPham> query = em.createQuery(jpql, SanPham.class);
+            query.setParameter("maSanPham", maSanPham);
+            SanPham entity = query.getSingleResult();
+            if (entity != null) {
+                em.remove(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
 }

@@ -49,4 +49,14 @@ public interface SanPhamDAO extends CrudDAO<SanPham, Long> {
      */
     Optional<SanPham> findByMaSanPham(String maSanPham);
 
+    /**
+     * *
+     * <p>
+     * The method deleteByMaSanPham.
+     * </p>
+     *
+     * @author MinhNgoc
+     * @param maSanPham the ma san pham
+     */
+    void deleteByMaSanPham(String maSanPham);
 }
