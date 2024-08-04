@@ -18,7 +18,7 @@
     <servlet-name>ChiTietSanPhamController</servlet-name>
     <url-pattern>/ChiTietSanPhamController</url-pattern>
   </servlet-mapping>
-  <display-name>ultralntinct</display-name>
+  <display-name>PS37328_NguyenThiMinhNgoc_ASM</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

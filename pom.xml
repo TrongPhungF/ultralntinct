@@ -2,8 +2,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ultralntinct</groupId>
-	<artifactId>ultralntinct</artifactId>
+	<groupId>PS37328_NguyenThiMinhNgoc_ASM</groupId>
+	<artifactId>PS37328_NguyenThiMinhNgoc_ASM</artifactId>
 	<version>service</version>
 	<packaging>war</packaging>
 
@@ -37,7 +37,7 @@
 					<warSourceDirectory>WebContent</warSourceDirectory>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>properties-maven-plugin</artifactId>
 				<version>1.2.1</version>
@@ -51,12 +51,12 @@
 							<useDefaultValues>true</useDefaultValues>
 							<files>
 								<file>${project.basedir}/.env</file>
-								<!--<file>${project.basedir}/src/main/resources/application.properties</file>-->
+								<file>${project.basedir}/src/main/resources/application.properties</file>
 							</files>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 		</plugins>
 	</build>
 
