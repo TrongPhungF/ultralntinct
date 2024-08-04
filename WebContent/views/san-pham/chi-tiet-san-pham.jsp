@@ -49,12 +49,15 @@
                     <div class="text-center mb-5">
                         <h3>Chi tiết sản phẩm</h3>
                     </div>
+                     <c:if test="${not empty errorMessage}">
+                         <div class="alert alert-danger">${errorMessage}</div>
+                    </c:if>
                     <div class="row">
                         <div class="col-sm-4">
 
                             <div class="container">
                                 <div class="preview">
-                                    <img id="img-preview" src="${sanPham.hinh != null ? sanPham.hinh : 'img/fenix/7progray.jpg'}" width="300px" height="300px"/>
+                                    <img id="img-preview" src="${sanPham.hinh != null ? sanPham.hinh : 'img/default-product-image.png'}" width="300px" height="300px"/>
                                     <input accept="image/*" type="file" id="file-input" name="hinh"/>
                                 </div>
                             </div>
@@ -66,7 +69,7 @@
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="maSanPham"
-                                           name="maSanPham" ${!isCreate ? 'readonly' : ''} value="${sanPham.maSanPham}">
+                                           name="maSanPham" readonly="readonly" value="${sanPham.maSanPham}">
                                 </div>
                             </div>
                             <div class="row mb-3 mb-4 align-items-center">

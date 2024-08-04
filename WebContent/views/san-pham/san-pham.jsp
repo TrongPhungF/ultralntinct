@@ -30,6 +30,9 @@
             <div class="invoice-details p-3 border rounded mt-4"
                  style="background-color: #F5F5F5; color: dimgray;">
                 <h3 class="mb-4 text-center">Danh sách sản phẩm</h3>
+                <c:if test="${not empty errorMessage}">
+                         <div class="alert alert-danger">${errorMessage}</div>
+                    </c:if>
                 <table class="table">
                     <thead>
                     <tr>

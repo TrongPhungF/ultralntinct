@@ -68,6 +68,8 @@ public class Constant {
 
     public static final String AES = "AES";
 
+    public static final String SP_CODE = "SP";
+
     /**
      * Instantiates a new constant.
      */

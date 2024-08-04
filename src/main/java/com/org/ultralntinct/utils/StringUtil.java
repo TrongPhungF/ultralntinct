@@ -1,5 +1,7 @@
 package com.org.ultralntinct.utils;
 
+import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * <p>
@@ -22,10 +24,10 @@ public class StringUtil {
      * @param maxMaDiaChi the max ma dia chi
      * @return the string
      */
-    public static String genCodeDiaChi(String code, String numberGen, int maxMaDiaChi) {
-        StringBuilder codeFormat = new StringBuilder(code).append("%")
-                      .append(numberGen).append("d");
-        return String.format(codeFormat.toString(), maxMaDiaChi + 1);
+    public static String genCode(String code) {
+        StringBuilder codeFormat = new StringBuilder(code).append("-").append(LocalDate.now().toString()).append("-")
+                .append(UUID.randomUUID());
+        return codeFormat.toString();
     }
 
     /**

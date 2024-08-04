@@ -18,6 +18,7 @@ import com.org.ultralntinct.service.S3Service;
 import com.org.ultralntinct.utils.Constant;
 import com.org.ultralntinct.utils.DateUtil;
 import com.org.ultralntinct.utils.FileUtil;
+import com.org.ultralntinct.utils.StringUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -36,9 +37,9 @@ import jakarta.servlet.http.Part;
  * @author MinhNgoc
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-		maxFileSize = 1024 * 1024 * 50, // 50MB
-		maxRequestSize = 1024 * 1024 * 50) // 50MB
-@WebServlet(urlPatterns = {"/san-pham"})
+        maxFileSize = 1024 * 1024 * 50, // 50MB
+        maxRequestSize = 1024 * 1024 * 50) // 50MB
+@WebServlet(urlPatterns = { "/san-pham" })
 public class SanPhamController extends HttpServlet {
 
     /** The Constant serialVersionUID. */
@@ -86,10 +87,10 @@ public class SanPhamController extends HttpServlet {
         } else {
             sanPhamList = sanPhamDAO.findAll();
         }
-        for (var sanPham: sanPhamList) {
-			String url = s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3);
-			sanPham.setHinh(url);
-		}
+        for (var sanPham : sanPhamList) {
+            String url = s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3);
+            sanPham.setHinh(url);
+        }
 
         request.setAttribute("sanPhamList", sanPhamList);
         request.getRequestDispatcher("/views/san-pham/san-pham.jsp").forward(request, response);
@@ -132,15 +133,15 @@ public class SanPhamController extends HttpServlet {
      */
     private void createOrUpdateSanPham(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        request.setCharacterEncoding("UTF-8");
 
         String sanPhamNoStr = request.getParameter("sanPhamNo");
         String maSanPhamStr = request.getParameter("maSanPham");
-        Optional<SanPham> optionalSanPham = sanPhamDAO.findByMaSanPham(maSanPhamStr);
-
-        if (optionalSanPham.isEmpty()) {
-            redirectToDetailPageWithError(request, response, maSanPhamStr, "Không tìm thấy sản phẩm !!!");
-            return;
+        if (StringUtils.isNotBlank(maSanPhamStr)) {
+            Optional<SanPham> optionalSanPham = sanPhamDAO.findByMaSanPham(maSanPhamStr);
+            if (optionalSanPham.isEmpty()) {
+                redirectToDetailPageWithError(request, response, maSanPhamStr, "Không tìm thấy sản phẩm !!!");
+                return;
+            }
         }
 
         String maLoaiSanPhamStr = request.getParameter("maLoaiSanPham");
@@ -173,11 +174,13 @@ public class SanPhamController extends HttpServlet {
      * @param response     the response
      * @param maSanPhamStr the ma san pham str
      * @param errorMessage the error message
-     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws IOException      Signals that an I/O exception has occurred.
+     * @throws ServletException
      */
-    private void redirectToDetailPageWithError(HttpServletRequest request, HttpServletResponse response, String maSanPhamStr, String errorMessage) throws IOException {
+    private void redirectToDetailPageWithError(HttpServletRequest request, HttpServletResponse response,
+            String maSanPhamStr, String errorMessage) throws IOException, ServletException {
         request.setAttribute("errorMessage", errorMessage);
-        response.sendRedirect(request.getContextPath() + "/chi-tiet-san-pham?maSanPham=" + maSanPhamStr);
+        request.getRequestDispatcher("/views/san-pham/san-pham.jsp").forward(request, response);
     }
 
     /**
@@ -197,7 +200,11 @@ public class SanPhamController extends HttpServlet {
         if (StringUtils.isNotBlank(sanPhamNoStr)) {
             sanPham.setSanPhamNo(Long.parseLong(sanPhamNoStr));
         }
-        sanPham.setMaSanPham(request.getParameter("maSanPham"));
+        if (StringUtils.isNotBlank(request.getParameter("maSanPham"))) {
+            sanPham.setMaSanPham(request.getParameter("maSanPham"));
+        } else {
+            sanPham.setMaSanPham(StringUtil.genCode(Constant.SP_CODE));
+        }
         sanPham.setTenSanPham(request.getParameter("tenSanPham"));
         sanPham.setGiaNiemYet(new BigDecimal(request.getParameter("giaNiemYet")));
         sanPham.setLoaiSanPham(loaiSanPham);
@@ -216,7 +223,8 @@ public class SanPhamController extends HttpServlet {
      * @return the string
      */
     private String generateS3KeyForFile(String maSanPham, Part filePart) {
-        String timestamp = DateUtil.convertPatternLocalDateTimeToString(LocalDateTime.now(), DateUtil.DATE_TIME_PATTERN);
+        String timestamp = DateUtil.convertPatternLocalDateTimeToString(LocalDateTime.now(),
+                DateUtil.DATE_TIME_PATTERN);
         String fileName = timestamp + "_" + FileUtil.getFileName(filePart);
         return Constant.S3_FOLDER.formatted("san-pham", maSanPham, fileName);
     }
