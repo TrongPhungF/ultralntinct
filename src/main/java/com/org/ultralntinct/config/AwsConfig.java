@@ -1,6 +1,5 @@
 package com.org.ultralntinct.config;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;

@@ -16,7 +16,7 @@
 		    justify-content: center;
 		    align-items: center;
 		    height: 100vh;
-		    background-image: url("/ultralntinct/img/bg.jpg");
+		    background-image: url("/PS37328_NguyenThiMinhNgoc_ASM/img/bg.jpg");
 		    background-size: cover;
 		    background-position: center;
 		}

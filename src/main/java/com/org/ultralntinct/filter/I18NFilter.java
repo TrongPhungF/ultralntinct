@@ -7,7 +7,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 @WebFilter("/*")
 public class I18NFilter implements HttpFilter {
 
@@ -18,7 +17,8 @@ public class I18NFilter implements HttpFilter {
         if (lang != null) {
             req.getSession().setAttribute("lang", lang);
         }
+        System.out.println("Current language: " + req.getSession().getAttribute("lang"));
         chain.doFilter(req, resp);
     }
-
 }
+

@@ -13,6 +13,7 @@
     <link rel="shortcut icon" type="image/png" href="img/logo1.png">
 </head>
 <body>
+
 <div class="row">
     <jsp:include page="/views/page/nav.jsp"/>
     <div class="col-9 m-2">
@@ -54,7 +55,7 @@
                             <td><c:out value="${sanPham.loaiSanPham.maLoaiSanPham}"/></td>
                             <td><c:out value="${sanPham.tenSanPham}"/></td>
                             <td><c:out value="${sanPham.giaNiemYet}"/></td>
-                            <td><img src="${sanPham.hinh != null ? sanPham.hinh : 'img/fenix/7progray.jpg'}" alt="Hình sản phẩm" width="100" height="100"/></td>
+                            <td><img src="${sanPham.hinh != null ? sanPham.hinh : 'img/unnamed.png'}" alt="Hình sản phẩm" width="100" height="100"/></td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/chi-tiet-san-pham?maSanPham=${sanPham.maSanPham}" class="btn btn-link">
                                     <i class="fa-solid fa-pen"></i>

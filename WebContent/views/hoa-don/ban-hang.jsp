@@ -15,7 +15,7 @@
 <body>
 <div class="row">
         <jsp:include page="/views/page/nav.jsp"/>
-    <div class="col-6 m-2">
+    <div class="col-6 mt-2">
             <div class="p-2" style="background-color: #27AE60; border-radius: 5px;">
               <div class="input-group">
                 <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>

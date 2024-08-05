@@ -9,139 +9,263 @@
     <jsp:include page="page/header.jsp"/>
     <link rel="stylesheet" href="css/index.css">
     <link rel="shortcut icon" type="image/png" href="img/logo1.png">
-    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            border-radius: 10px;
+    width: 1055px;
+            margin-left: 20px;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header input[type="search"] {
+            padding: 10px;
+            width: 1000px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .header input[type="search"]:focus {
+            border-color:#198754;
+        }
+        .header .right-icons {
+            display: flex;
+            align-items: center;
+        }
+        .header .right-icons a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        .header .right-icons a:hover {
+            color: #198754;
+        }
+        .container {
+            padding: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .stats .stat {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            margin-right: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .stats .stat:hover {
+            transform: translateY(-5px);
+        }
+        .stats .stat:last-child {
+            margin-right: 0;
+        }
+        .stats .stat h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .stats .stat p {
+            margin: 5px 0 0;
+            color: #198754;
+        }
+        .cards {
+            display: flex;
+            justify-content: space-between;
+        }
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 48%;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .card h4 {
+            margin: 0;
+            color:#198754;
+        }
+        .card table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .card table th, .card table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        .card table th {
+            background-color: #f5f5f5;
+        }
+        .card .view-all {
+            text-decoration: none;
+            color: #198754;
+        }
+        .view-button {
+            background-color:#198754;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .view-button:hover {
+            background-color: #198754;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
 <div class="row">
         <jsp:include page="page/nav.jsp"/>
-    <div class="col-6 m-2">
-            <div class="p-2" style="background-color: #27AE60; border-radius: 5px;">
-              <div class="input-group">
-                <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-                <input class="form-control" placeholder="Tìm kiếm mã sản phẩm">
-              </div>
+    <div class="col-9 m-2">
+    <div >
+        <div class="header">
+            <input type="search" placeholder="Search...">
+        </div>
+        <div class="container">
+            <div class="stats">
+                <div class="stat">
+                    <h3>2194</h3>
+                    <p>Customer</p>
+                </div>
+                <div class="stat">
+                    <h3>53</h3>
+                    <p>New Customer</p>
+                </div>
+                <div class="stat">
+                    <h3>3435</h3>
+                    <p>Products Sold.</p>
+                </div>
+                <div class="stat">
+                    <h3>46,350,000 VND</h3>
+                    <p>Income</p>
+                </div>
             </div>
-            <table class="table" style="margin-top: 10px;">
-              <thead>
-                <tr>
-                  <th scope="col">STT</th>
-                  <th scope="col">Mã sản phẩm</th>
-                  <th scope="col">Tên sản phẩm</th>
-                  <th scope="col">Số lượng</th>
-                  <th scope="col">Giá bán</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>010-02562-50</td>
-                  <td>Garmin forerunner 55 xám</td>
-                  <td>1</td>
-                  <td>5,025,000 vnd</td>
-                </tr>
-              </tbody>
-          </table>
-      </div>
-            
-        <div class="col-5 m-2" style="margin-top: 10px; width: 480px;">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row btn-group align-items-center">
-                        <div class="col-sm-3">
-                          <select class="form-select">
-                            <option>Bán nhanh</option>
-                            <option>Bán giao hàng</option>
-                          </select>
-                        </div>
-                        <div class="col-sm-9 text-end">
-                          10/09/2004 19:30
-                        </div>
-                      </div>
-                    <div class="row" style="margin-top: 10px; margin-left: 0px; width: 430px;">
-                        <input type="search" id="form1" class="form-control p-2" placeholder="Tìm kiếm mã khách hàng" />
-                        <button class="plus"><i class="fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></button>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Recent Payments</h4>
+                        <a href="#" class="view-all">View All</a>
                     </div>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content">
-                            <div class="modal-header bg-white border-0">
-                              <h4 class="modal-title" id="exampleModalLabel">Thêm khách hàng</h4>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="themkh row align-items-center">
-                                    <label class="col-sm-4">Mã khách hàng</label> <input placeholder="Nhập mã khách hàng" class="ipthemkh form-control col-sm-8">
-                                </div>
-                                <div class="themkh row align-items-center">
-                                    <label class="col-sm-4">Tên khách hàng</label> <input placeholder="Nhập tên khách hàng" class="ipthemkh form-control col-sm-8">
-                                </div>
-                                <div class="themkh row align-items-center">
-                                    <label class="col-sm-4">Số điện thoại</label> <input placeholder="Nhập số điện thoại" class="ipthemkh form-control col-sm-8">
-                                </div>
-                                <div class="themkh row align-items-center">
-                                    <label class="col-sm-4">Địa chỉ</label> <input placeholder="Nhập địa chỉ" class="ipthemkh form-control col-sm-8">
-                                </div>
-                                <div class="themkh row align-items-center">
-                                    <label class="col-sm-4">Giới tính</label>
-                                    <div class="col-sm-8 btn-group">
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">Nam</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">Nữ</label>
-                                      </div>
-                                    </div>
-                                </div>
-                                <div class="themkh row align-items-center">
-                                    <label class="col-sm-4">Email</label> <input placeholder="Nhập Email" class="ipthemkh form-control col-sm-8">
-                                </div>
-                            </div>
-                            <div class="modal-footer bg-white border-0">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                              <button type="button" class="btn btn-primary">Lưu</button>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div style="margin-top: 20px; margin-left: 0px; ">
-                      <div class="row d-flex align-items-center" style="flex-wrap: nowrap; margin-bottom: 10px;">
-                       <input class="form-control" style="width: 150px;margin-left:13px;" placeholder="Mã khách hàng">
-                       <input class="form-control " style="width: 200px;margin-left:40px;" placeholder="Tên khách hàng">
-                      </div>         
-                      <table class="table" style="margin-top: 10px;">
+                    <table>
                         <thead>
-                          <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Tên SP</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Giá bán</th>
-                            <th scope="col">Tổng</th>
-                          </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Amount</th>
+                                <th>Option</th>
+                            </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Garmin forerunner 55 xám</td>
-                            <td>1</td>
-                            <td>5,025,000 vnd</td>
-                            <td>5,025,000 vnd</td>
-                          </tr>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>123 Đường Nguyễn Huệ,
+								Phường Bến Nghé, Quận 1,
+								Thành phố Hồ Chí Minh,
+								Việt Nam.</td>
+                                <td>1,200,000 VND</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>St. James College</td>
+                                <td>$120</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>St. James College</td>
+                                <td>$120</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>St. James College</td>
+                                <td>$120</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+
+                            <!-- Repeat similar rows as needed -->
                         </tbody>
                     </table>
-                    <div class="row m-2 align-content-center">
-                    Tổng tiền
-                    <b class="text-end" style="margin-top: -30px;">1,000,000 vnđ</b>
-                    </div>
-                    
-                    </div>
                 </div>
-                <div class="card-footer bg-white border-0">
-                    <button class="btn btn-success w-100">Thanh toán</button>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>New Customer</h4>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Profile</th>
+                                <th>Name</th>
+                                <th>Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="profile-pic.jpg" alt="Profile" class="profile-pic"></td>
+                                <td>John Steve Doe</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src="profile-pic.jpg" alt="Profile" class="profile-pic"></td>
+                                <td>John Steve Doe</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src="profile-pic.jpg" alt="Profile" class="profile-pic"></td>
+                                <td>John Steve Doe</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src="profile-pic.jpg" alt="Profile" class="profile-pic"></td>
+                                <td>John Steve Doe</td>
+                                <td><button class="view-button">View</button></td>
+                            </tr>
+                            <!-- Repeat similar rows as needed -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
+</body>
+</html>
+
     </div>
     <jsp:include page="page/footer.jsp"/>
 <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
