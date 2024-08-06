@@ -1,6 +1,6 @@
 package com.org.ultralntinct.dao.jpa;
 
-import java.sql.SQLException;
+import java.util.Optional;
 
 import com.org.ultralntinct.model.KhachHang;
 
@@ -15,11 +15,14 @@ public interface KhachHangDAO extends CrudDAO<KhachHang, Long> {
 
     /**
      * <p>
-     * Method get max MaKhachHang.
+     * Method findByMaKhachHang.
      * </p>
      *
-     * @return long.
+     * @param maKhachHang String
+     *
+     * @return KhachHang.
+     *
      * @author MinhNgoc.
      */
-    long getMaxMaSanPham() throws SQLException;
+    Optional<KhachHang> findByMaKhachHang(String maKhachHang);
 }
