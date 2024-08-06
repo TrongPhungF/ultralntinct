@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.org.ultralntinct.dao.impl.KhachHangDAOImpl;
 import com.org.ultralntinct.dao.impl.SanPhamDAOImpl;
 import com.org.ultralntinct.dao.jpa.KhachHangDAO;
@@ -74,7 +76,21 @@ public class BanHangController extends HttpServlet {
     protected void doBanHang(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<SanPham> sanPhamList = sanPhamDAO.findAll();
+        String sanPhamKeySearch = request.getParameter("sanPhamKeySearch");
+        String inputMaKhachHang = request.getParameter("inputMaKhachHang");
+
+        List<SanPham> sanPhamList;
+        if (StringUtils.isNotBlank(sanPhamKeySearch)) {
+            sanPhamList = sanPhamDAO.searchSanPham(sanPhamKeySearch);
+        } else {
+            sanPhamList = sanPhamDAO.findAll();
+        }
+
+        KhachHang khachHang = new KhachHang();
+        if (StringUtils.isNotBlank(inputMaKhachHang)) {
+            khachHang = khachHangDAO.findByMaKhachHang(inputMaKhachHang).orElse(khachHang);
+        }
+
         sanPhamList.sort(Comparator.comparing(SanPham::getSanPhamNo, Comparator.nullsLast(Comparator.reverseOrder())));
         sanPhamList.forEach((SanPham sanPham) -> {
             String url = s3Service.generatePresignedUrl(sanPham.getHinh(), Constant.BUCKET_NAME_S3);
@@ -82,6 +98,7 @@ public class BanHangController extends HttpServlet {
         });
 
         request.setAttribute(SAN_PHAM_LIST, sanPhamList);
+        request.setAttribute("khachHang", khachHang);
         request.getRequestDispatcher(VIEW_BAN_HANG_INIT).forward(request, response);
     }
 

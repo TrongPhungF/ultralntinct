@@ -19,8 +19,10 @@
                 <div class="col-6">
                     <div class="p-2" style="background-color: #27AE60; border-radius: 5px;">
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span> <input
-                                class="form-control" placeholder="Tìm kiếm mã sản phẩm">
+                            <form action="${pageContext.request.contextPath}/ban-hang" class="search-form">
+                                <input class="form-control" name="sanPhamKeySearch" placeholder="Tìm kiếm mã sản phẩm">
+                                <button class="btn" type="submit">Tìm kiếm</button>
+                            </form>
                         </div>
                     </div>
                     <table class="table" style="margin-top: 10px;">
@@ -44,12 +46,10 @@
                                     <td style="width: 20%;">
                                         <c:out value="${sanPham.maSanPham}" />
                                     </td>
-                                    <td style="width: 30%;">
-                                        <a
+                                    <td style="width: 30%;"><a
                                             href="${pageContext.request.contextPath}/chi-tiet-san-pham?maSanPham=${sanPham.maSanPham}">
                                             <c:out value="${sanPham.tenSanPham}" />
-                                        </a>
-                                    </td>
+                                        </a></td>
                                     <td style="width: 10%;">
                                         <c:out value="${sanPham.soLuongTon}" />
                                     </td>
@@ -80,10 +80,13 @@
                                 <div class="col-sm-9 text-end">10/09/2004 19:30</div>
                             </div>
                             <div class="row" style="margin-top: 10px; margin-left: 0px; width: 430px;">
-                                <input type="search" id="inputMaKhachHang" class="form-control p-2" placeholder="Tìm kiếm mã khách hàng" />
-                                <button class="plus">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+                                <form action="${pageContext.request.contextPath}/ban-hang">
+                                    <input type="search" name="inputMaKhachHang" class="form-control p-2"
+                                        placeholder="Tìm kiếm mã khách hàng" />
+                                    <button class="plus">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
                             </div>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
@@ -142,13 +145,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <form action="${pageContext.request.contextPath}/ban-hang">
                             <div style="margin-top: 20px; margin-left: 0px;">
                                 <div class="row d-flex align-items-center"
                                     style="flex-wrap: nowrap; margin-bottom: 10px;">
                                     <input readonly class="form-control" style="width: 150px; margin-left: 13px;"
-                                        placeholder="Mã khách hàng" id="maKhachHang">
+                                        placeholder="Mã khách hàng" id="maKhachHang" value="${khachHang.maKhachHang}">
                                     <input id="tenKhachHang" class="form-control "
-                                        style="width: 200px; margin-left: 40px;" placeholder="Tên khách hàng">
+                                        style="width: 200px; margin-left: 40px;" placeholder="Tên khách hàng"
+                                        value="${khachHang.tenKH}">
                                 </div>
                                 <table class="table" style="margin-top: 10px; font-size: 9px;">
                                     <thead>
@@ -168,14 +173,17 @@
                                 <div class="row m-2 align-content-center">
                                     Tổng tiền <b class="text-end" id="totalPrice" style="margin-top: -30px;"></b>
                                 </div>
-
+                                <div class="card-footer bg-white border-0">
+                                    <button type="submit" class="btn btn-success w-100">Thanh toán</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-footer bg-white border-0">
-                            <button class="btn btn-success w-100">Thanh toán</button>
+                        </form>
                         </div>
                     </div>
+
+
                 </div>
+            </div>
             </div>
             <jsp:include page="/views/page/footer.jsp" />
             <script src="https://kit.fontawesome.com/b6b15d6477.js" crossorigin="anonymous"></script>
@@ -200,17 +208,17 @@
                 }
 
                 function addSanPhamByMaSanPham(maSanPham) {
-                    const inputMaKhacHang = document.getElementById('inputMaKhachHang').value;
+                    var inputMaKhacHang = document.getElementById('maKhachHang').value;
 
                     if (!inputMaKhacHang) {
                         alert('Vui lòng nhập mã khách hàng trước khi thêm sản phẩm.');
                         return;
                     }
 
-                    const rowToClone = findRowByMaSanPham(maSanPham, 'productTableBody');
+                    var rowToClone = findRowByMaSanPham(maSanPham, 'productTableBody');
                     if (rowToClone) {
-                        const updateTableBody = document.getElementById('productTableBodyAdd');
-                        const duplicateRow = findRowByMaSanPham(maSanPham, 'productTableBodyAdd');
+                        var updateTableBody = document.getElementById('productTableBodyAdd');
+                        var duplicateRow = findRowByMaSanPham(maSanPham, 'productTableBodyAdd');
                         if (duplicateRow) {
                             incrementQuantityAndTotal(duplicateRow);
                         } else {
@@ -223,10 +231,11 @@
                 }
 
                 function findRowByMaSanPham(maSanPham, tableBodyId) {
-                    const rows = document.getElementById(tableBodyId).getElementsByTagName('tr');
+                    var rows = document.getElementById(tableBodyId).getElementsByTagName('tr');
                     for (let i = 0; i < rows.length; i++) {
-                        const cells = rows[i].getElementsByTagName('td');
-                        if (cells[1].textContent === maSanPham) {
+                        var cells = rows[i].getElementsByTagName('td');
+                        console.log(rows[i])
+                        if (cells[1].textContent.trim() === maSanPham.trim()) {
                             return rows[i];
                         }
                     }
